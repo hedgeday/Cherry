@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Cherry</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" >
+	<link rel="stylesheet" href="style.css" >
+	<!-- Icon Pack forked from commandelimited on GitHub -->
+	<link rel="stylesheet" href="./iconPack/original/jqm-icon-pack-2.0-original.css">
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src='./app.js'></script>
+	<script>
+    	window.onload = function(){
+    		new app();
+    		console.log(app);
+    	}
+    </script>
+</head>
+<body>
+<div data-role="page" data-title="Sign up" id="homescreen">
+	<div data-role="header" class="ui-bar-d"><h1>Playground</h1></div>
+	<div data-role="content">
+		<!-- <h2 id="center">Your Space</h2> -->
+		<a id="timelineButton" href="#PC" data-role="button" data-icon="arrow-r" data-iconpos="right">Timeline</a>
+		<!-- <a id="timelineButton" href="#PC" data-role="button" data-icon="arrow-r" data-iconpos="right">Calendar</a> -->
+		<a id="timelineButton" href="#PC" data-role="button" data-icon="arrow-r" data-iconpos="right">Travel</a>
+ 	</div>
+
+	<div data-role="footer" data-position="fixed" class="ui-bar-d">
+	<div data-role="navbar" data-iconpos="top">
+	<ul>
+		<li><a href="#homescreen" data-icon="home" >Home</a></li>
+		<li><a href="#editProfile" data-icon="info">Profile</a></li>
+		<li><a href="#editJointProfile" data-icon="direction">Joint Profile</a></li>
+		<li><a href="#mood" data-icon="heart">Mood</a></li>
+		<li><a href="#profilePic" data-icon="person">Profile Picture</a></li>
+	</ul>
+	</div><!-- /navbar -->
+	</div>
+</div>
+
+
+</body>
+</html>
