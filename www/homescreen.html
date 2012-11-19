@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Cherry</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" >
+	<link rel="stylesheet" href="/style/style.css" >
+	<!-- Icon Pack forked from commandelimited on GitHub -->
+	<link rel="stylesheet" href="/style/jqm-icon-pack-2.0-original.css">
+		<link rel="stylesheet" href="/style/jqm-icon-pack-2.1.2-fa.css" />
+
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src='/scripts/app.js'></script>
+	<script>
+    	window.onload = function(){
+    		new app();
+    		console.log(app);
+    	}
+    </script>
+</head>
+<body>
+<div data-role="page" data-title="Sign up" id="homescreen">
+	<div data-role="header" class="ui-bar-d"><h1>Playground</h1></div>
+	<div data-role="content">
+		
+		<div class="ui-grid-a center">
+		<div class="ui-block-a"><strong>Person A</strong></br>
+			<img class="profilePic" src="../images/profilePicM.png"></img>
+			</div>
+		<div class="ui-block-b"><strong>Person B</strong></br>
+			<img class="profilePic" src="../images/profilePicF.png"></img>
+			</div>
+		
+		</div><!-- /grid-a -->
+
+ 	</div>
+
+	<div data-role="footer" data-position="fixed" class="ui-bar-d">
+	<div data-role="navbar" data-iconpos="top">
+	<ul>
+		<li><a href="#profile" data-icon="person" >Profile</a></li>
+		<li><a href="#playground" data-icon="chat">Playground</a></li>
+		<li><a href="#travel" data-icon="plane">Travel</a></li>
+	</ul>
+	</div><!-- /navbar -->
+	</div>
+</div>
+
+
+</body>
+</html>
