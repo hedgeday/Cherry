@@ -20,35 +20,47 @@
 </head>
 <body>
 <div data-role="page" data-title="Sign up" id="homescreen">
-	<div data-role="header" class="ui-bar-d"><h1>Playground</h1></div>
+	<div data-role="header" class="ui-bar-d"><h1>Profile</h1></div>
 	<div data-role="content">
 		
-		<div class="ui-grid-a center">
+		<div class="ui-grid-a">
 		
-		<div class="ui-block-a"><strong>Person A</strong></br>
-			<img class="profilePic" src="../images/profilePicM.png"></img>
-			<p>Name</p>
-			<p>DOB</p>
-			<p>Mood</p>
-			<p>Status</p>
+		<div class="ui-block-a center"><strong>Person A</strong></br><p>ab/cd/efgh</p></br>
+			<div class="imageWrapper center">
+				<img class="profilePic" src="../images/profilePicM.png"></img>
+			</div>
+			<p>Mood: Happy</p>
+			<p>Status: Blah blah fuck you</p>
 		</div>
 		
-		<div class="ui-block-b"><strong>Person B</strong></br>
+		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p></br>
 			<img class="profilePic" src="../images/profilePicF.png"></img>
-			<p>Name</p>
-			<p>DOB</p>
-			<p>Mood</p>
-			<p>Status</p>
+			<p>Mood: Angry</p>
+			<p>Status: Whatevah.</p>
 		</div>
 		
-		</div><!-- /grid-a -->
+		</div><!-- Two Column Grid -->
+
+		<div class="ui-grid center topMargin">
+			<strong>Couple Notifications</strong>
+			<p>Upcoming event: 1 year anniversary</p>
+		</div><!-- One Column Grid -->
+
+		<div class="ui-grid center">
+			<strong>Couple Statistics</strong>
+			<p>Started dating: ab/cd/efgh</p>
+			<p>Time spent together: 40 weeks</p>
+			<p>Number of break-ups: 3</p>
+			<p>Hours spent on this app:</p>
+			<p>Person A: x | Person B: y</p>
+		</div><!-- One Column Grid -->
 
  	</div>
 
 	<div data-role="footer" data-position="fixed" class="ui-bar-d">
 	<div data-role="navbar" data-iconpos="top">
 	<ul>
-		<li><a href="#profile" data-icon="person" >Profile</a></li>
+		<li><a href="#profile" class="ui-persist" data-icon="person" >Profile</a></li>
 		<li><a href="#playground" data-icon="chat">Playground</a></li>
 		<li><a href="#travel" data-icon="plane">Travel</a></li>
 	</ul>

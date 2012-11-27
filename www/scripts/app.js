@@ -8,6 +8,6 @@ login.prototype.setup = function(){
 	$('#submitSignIn').on('click', function(){this.validateSignIn()}.bind(this));
 	$.mobile.page.prototype.options.backBtnTheme = "d";
 	$('#notificationWarn').on('click', function(){$("#disclaimer").popup()});
-	$('#signUpButton').on('click', function(){$.mobile.changePage($("#signup"));})
+	$('#signUpButton').on('tap', function(){$.mobile.changePage($("#signup"));})
 	$('#createAccButton').on('click', function(){$.mobile.changePage("homescreen.html")});
 };
