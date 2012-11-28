@@ -10,6 +10,7 @@
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script src='/scripts/app.js'></script>
+	<script src='/scripts/playground.js'></script>
 	<script>
     	window.onload = function(){
     		new login();
@@ -41,7 +42,7 @@
 			<input type="password" name="passwordInput" id="passwordInput" value="" placeholder="Password"/>
 			</div>
 		</form>
-		<a id="submitSignIn" data-role="button" data-icon="arrow-r" data-iconpos="right">Sign In</a>
+		<a href="#homescreen" id="submitSignIn" data-role="button" data-icon="arrow-r" data-iconpos="right">Sign In</a>
 		<p class='center'>Don't have an account? <a id="signUpButton">Sign up!</a></p>
  	</div>
 </div>
@@ -74,6 +75,90 @@
 		<a id="createAccButton" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Account</a>
 	</div>
 </div>
+
+<div data-role="page" data-title="Sign up" id="homescreen">
+	<div data-role="header" class="ui-bar-d"><h1>Profile</h1></div>
+	<div data-role="content">
+		
+		<div class="ui-grid-a">
+		
+		<div class="ui-block-a center"><strong>Person A</strong></br><p>ab/cd/efgh</p></br>
+			<div class="imageWrapper center">
+				<img class="profilePic" src="../images/profilePicM.png"></img>
+			</div>
+			<p>Mood: Happy</p>
+			<p>Status: Blah blah fuck you</p>
+		</div>
+		
+		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p></br>
+			<img class="profilePic" src="../images/profilePicF.png"></img>
+			<p>Mood: Angry</p>
+			<p>Status: Whatevah.</p>
+		</div>
+		
+		</div><!-- Two Column Grid -->
+
+		<div class="ui-grid center topMargin">
+			<strong>Couple Notifications</strong>
+			<p>Upcoming event: 1 year anniversary</p>
+		</div><!-- One Column Grid -->
+
+		<div class="ui-grid center">
+			<strong>Couple Statistics</strong>
+			<p>Started dating: ab/cd/efgh</p>
+			<p>Time spent together: 40 weeks</p>
+			<p>Number of break-ups: 3</p>
+			<p>Hours spent on this app:</p>
+			<p>Person A: x | Person B: y</p>
+		</div><!-- One Column Grid -->
+
+ 	</div>
+
+	<div data-role="footer" data-position="fixed" class="ui-bar-d">
+	<div data-role="navbar" data-iconpos="top">
+	<ul>
+		<li><a href="#profile" class="ui-persist" data-icon="person" >Profile</a></li>
+		<li><a href="#playground" data-icon="chat">Playground</a></li>
+		<li><a href="#travel" data-icon="plane">Travel</a></li>
+	</ul>
+	</div><!-- /navbar -->
+	</div>
+</div>
+
+<div data-role="page" data-title="playground" id="playground">
+    <div data-role="header" data-position="fixed" class="ui-bar-d">
+        <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
+        <h1>Playground</h1>
+        <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
+    </div>
+	<div data-role="content">
+        <div id="messages">
+            
+        	<!-- <div id="myMessages"></div>
+        	<div id="otherMessages" class="floatRight"></div> -->
+
+        </div>    
+
+        <div data-role="footer" data-position="fixed" class="ui-bar-d">                  
+    	    
+            <div id="newTextMessage" data-transition="slidedown" style='display: none;'>
+                <input id="messageInput" type='text'>
+                    <a id="newTextMessagePost" href="#" data-role="button" data-theme="b">Post</a>
+                    <a class="cancelPost" href="#" data-icon="arrow-d" data-iconpos="right" data-role="button">Cancel</a>
+            </div> <!-- /formDiv -->
+
+    	    <div data-role="navbar">
+                <ul>
+                    <li><a id="addText" href="#" data-icon="pencil">Text</a></li>
+                    <li><a id="addVoice" href="#" data-icon="volume-up">Voice</a></li>
+                    <li><a id="addPicture" href="#" data-icon="camera">Picture</a></li>
+                    <li><a id="addVideo" href="#" data-icon="facetime-video">Video</a></li>
+                </ul>
+            </div><!-- /navbar -->           		         
+        </div>
+ 	</div>
+</div>
+
 
 </body>
 </html>
