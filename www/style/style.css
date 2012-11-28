@@ -42,3 +42,16 @@
 .fullWidth{
 	width:100%;
 }
+
+.rightGap{
+	/*margin-right: 5px;*/
+}
+
+.otherMsg{
+	float: right;
+	clear: both;
+}
+
+.myMsg{
+	clear: both;
+}

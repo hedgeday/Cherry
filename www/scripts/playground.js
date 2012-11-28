@@ -17,13 +17,21 @@ var Playground = function() {
     });
     
     $('.cancelPost').tap(function() {
+        $('#newTextMessage input').val("");
         $('#newTextMessage').hide();
     });
     
     $('#newTextMessagePost').tap(function() {
-        $('#newTextMessage').hide();
-        $('#messages').prepend("<div><img src='/images/profilePicF.png' />" + $('#newTextMessage input').val() + "</div>");
-        $('#newTextMessage input').val("");
-        
+        submitPost();
     });
+
+    $('#messageInput').bind('keypress', function(e) {
+        if (e.keyCode == 13) submitPost();
+    });
+
+    function submitPost(){
+        $('#messages').append("<div class='otherMsg'>"+ $('#newTextMessage input').val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class='profilePic' src='/images/profilePicM.png' /> </div>");
+        $('#messages').append("<div class='myMsg'><img class='profilePic' src='/images/profilePicF.png' />" + $('#newTextMessage input').val() + "</div>");
+        $('#messageInput').val("");
+    }
 };
