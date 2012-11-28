@@ -26,4 +26,25 @@ var Playground = function() {
         $('#newTextMessage input').val("");
         
     });
+    
+    $('#addPicture').tap(function() {
+        alert(navigator.camera);
+        var destinationType = navigator.camera.DestinationType;
+        var pictureSource = navigator.camera.PictureSourceType;
+    
+        navigator.camera.getPicture(success, fail,
+            {
+                quality: 75,
+                destinationType: destinationType.DATA_URL
+            }
+         );
+        
+        function success(pic) {
+            alert(pic);
+        };
+        
+        function fail(msg) {
+            alert(msg);
+        };
+    });
 };
