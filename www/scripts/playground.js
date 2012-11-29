@@ -1,5 +1,5 @@
 var Playground = function() {
-    $('#addText').tap(function() {
+    $('#addText').tap(function(e) {
         $('#newTextMessage').show();
         $('#newTextMessage input').focus();
     });
@@ -9,10 +9,6 @@ var Playground = function() {
     });
     
     $('#addVoice').tap(function() {
-        $('#newTextMessage').hide();
-    });
-    
-    $('#addPicture').tap(function() {
         $('#newTextMessage').hide();
     });
     
@@ -30,6 +26,7 @@ var Playground = function() {
     });
     
     $('#addPicture').tap(function() {
+        $('#newTextMessage').hide();
         alert(navigator.camera);
         var destinationType = navigator.camera.DestinationType;
         var pictureSource = navigator.camera.PictureSourceType;
