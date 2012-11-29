@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/style/style.css" > 
 	<link rel="stylesheet" href="/style/jqm-icon-pack-2.0-original.css">
 	<link rel="stylesheet" href="/style/jqm-icon-pack-2.1.2-fa.css" />
+	<link rel="stylesheet" href="themes/cherry-theme.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <script src="/scripts/cordova-2.1.0.ios.js"></script>
@@ -18,7 +19,18 @@
     	window.onload = function(){
     		new login();
     	}
-    </script>    
+    </script>
+<style>
+
+.ui-page {
+	background: url(images/gray_jean.png);
+    background-repeat:repeat;
+    background-position:center center;
+    background-attachment:scroll;
+}
+
+</style>
+</head> 
 <body> 
 
 <div data-role="page" id="splash"> 
@@ -118,7 +130,7 @@
 	<div data-role="footer" data-position="fixed" class="ui-bar-d">
 	<div data-role="navbar" data-iconpos="top">
 	<ul>
-		<li><a href="#profile" class="ui-persist" data-icon="person" >Profile</a></li>
+		<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
 		<li><a href="#playground" data-icon="chat">Playground</a></li>
 		<li><a href="#travel" data-icon="plane">Travel</a></li>
 	</ul>
@@ -154,6 +166,30 @@
                     <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
                     <li><a id="addPicture" href="#playground" data-icon="camera">Picture</a></li>
                     <li><a id="addVideo" href="#playground" data-icon="facetime-video">Video</a></li>
+                </ul>
+            </div><!-- /navbar -->           		         
+        </div>
+ 	</div>
+</div>
+
+<div data-role="page" data-title="travel" id="travel">
+    <div data-role="header" data-position="fixed" class="ui-bar-d">
+        <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
+        <h1>Plan a trip</h1>
+        <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
+    </div>
+	<div data-role="content">
+        
+
+
+        <div data-role="footer" data-position="fixed" class="ui-bar-d">                  
+    	    
+    	    <div data-role="navbar">
+                <ul>
+                    <li><a id="addText" href="#" data-icon="pencil">Text</a></li>
+                    <li><a id="addVoice" href="#" data-icon="volume-up">Voice</a></li>
+                    <li><a id="addPicture" href="#" data-icon="camera">Picture</a></li>
+                    <li><a id="addVideo" href="#" data-icon="facetime-video">Video</a></li>
                 </ul>
             </div><!-- /navbar -->           		         
         </div>
