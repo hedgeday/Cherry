@@ -10,13 +10,15 @@
 	<link rel="stylesheet" href="themes/cherry-theme.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="phonegap.js"></script>
     <script src="/scripts/cordova-2.1.0.ios.js"></script>
-    <script src="/scripts/cordova-2.1.0.android.js"></script>
     <script src="/scripts/util.js"></script>
     <script src="/scripts/app.js"></script>
 	<script src="/scripts/playground.js"></script>
     <script>
     	window.onload = function(){
+            window.util = new Util();
+            window.util.patchFnBind();
     		new login();
     	}
     </script>
@@ -186,10 +188,6 @@
     	    
     	    <div data-role="navbar">
                 <ul>
-                    <li><a id="addText" href="#" data-icon="pencil">Text</a></li>
-                    <li><a id="addVoice" href="#" data-icon="volume-up">Voice</a></li>
-                    <li><a id="addPicture" href="#" data-icon="camera">Picture</a></li>
-                    <li><a id="addVideo" href="#" data-icon="facetime-video">Video</a></li>
                 </ul>
             </div><!-- /navbar -->           		         
         </div>

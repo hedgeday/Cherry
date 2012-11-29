@@ -27,8 +27,8 @@ var Playground = function() {
     
     $('#addPicture').tap(function() {
         $('#newTextMessage').hide();
-        alert(navigator.camera);
-        var destinationType = navigator.camera.DestinationType;
+        var destinationType = navigator.Camera.DestinationType;
+        alert(destinationType);
         var pictureSource = navigator.camera.PictureSourceType;
     
         navigator.camera.getPicture(success, fail,
