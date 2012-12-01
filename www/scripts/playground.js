@@ -7,14 +7,6 @@ var Playground = function() {
             $('#newTextMessage input').focus();
         });
         
-        $('#addVideo').tap(function() {
-            $('#newTextMessage').hide();
-        });
-        
-        $('#addVoice').tap(function() {
-            $('#newTextMessage').hide();
-        });
-        
         $('.cancelPost').tap(function() {
             $('#newTextMessage input').val("");
             $('#newTextMessage').hide();
@@ -30,6 +22,7 @@ var Playground = function() {
         
         $('#addPicture').tap(function() {
             $('#newTextMessage').hide();
+            
             var destinationType = navigator.camera.DestinationType;
             var pictureSource = navigator.camera.PictureSourceType;
         
@@ -42,12 +35,54 @@ var Playground = function() {
              );
             
             function success(pic) {
-                alert(pic);
+                var picture = $("#pictureTest")
+                picture.attr('src', 'data:image/jpeg;base64,' + pic);
             };
             
             function fail(msg) {
                 alert(msg);
             };
+        });
+        
+        $('#addVideo').tap(function() {
+            $('#newTextMessage').hide();
+            
+             navigator.device.capture.captureVideo(success, fail,
+                {
+                    limit: 1     
+                }   
+             );
+            
+            function success(vidData){
+                alert(vidData[0].type);
+                $("#videoHolder").html("<video width='250' height='300' controls='controls'><source src='" + vidData[0].fullPath + "' type='" + vidData[0].type + "'></video>");                
+            };
+            
+            function fail(msg) {
+                alert(msg);
+            };
+        });
+        
+        $('#addVoice').tap(function() {
+            $('#newTextMessage').hide();
+
+             navigator.device.capture.captureAudio(success, fail,
+                {
+                    limit: 1     
+                }   
+             );
+            
+            function success(audioData){
+                var file = new Media(audioData[0].fullPath); 
+                $("#audioHolder").click(function(){
+                    file.play();
+                });         
+            };
+            
+            function fail(msg) {
+                alert(msg);
+            };            
+            
         });
     
         function submitPost(){
