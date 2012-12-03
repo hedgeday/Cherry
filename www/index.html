@@ -66,23 +66,35 @@
 		<h4>Sign Up</h4>
 	</div>
 	<div data-role="content">
-		<p>Please enter the following fields:</p>
+		<p>Please enter the following information:</p>
 		<form>
 		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="username" class="select"></label>			
-			<input type="text" name="usernameInput" id="" value="" placeholder="Username"/>
+			<input type="text" name="unInput" id="unInput" value="" placeholder="Username"/>
 		</div>
 		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="password" class="select"></label>			
-			<input type="password" name="passwordInput" id="" value="" placeholder="Password"/>
+			<input type="password" name="passwordInput" id="pwInput" value="" placeholder="Password (8 Characters Minimum)"/>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="name" class="select"></label>			
+			<input type="text" name="nameInput" id="nInput" value="" placeholder="Your Full Name"/>
 		</div>
 		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="email" class="select"></label>			
-			<input type="email" name="emailInput" id="" value="" placeholder="Your Email"/>
+			<input type="email" name="emailInput" id="emailInput" value="" placeholder="Your Email"/>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="bd" class="select">Your birthday:</label>			
+			<input type="date" name="bdInput" id="birthdayInput" value="" placeholder=""/>
 		</div>
 		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="sigOtherEmail" class="select"></label>			
-			<input type="email" name="otherEmailInput" id="notificationWarn" value="" placeholder="Your Significant other's Email"/>
+			<input type="email" name="otherEmailInput" id="otherEmailInput" value="" placeholder="Your Significant other's Email"/>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="startDate" class="select">When did you start dating?</label>			
+			<input type="date" name="startDateInput" id="startDateInput" value="" placeholder=""/>
 		</div>
 		</form>
 		<a id="createAccButton" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Account</a>
@@ -95,7 +107,35 @@
 		
 		<div class="ui-grid-a block">
 		
-		<div class="ui-block-a center"><strong>Person A</strong></br><p>ab/cd/efgh</p></br>
+		<div class="ui-block-a center"><strong id="myName">Person A</strong></br><p id="myBD">ab/cd/efgh</p>
+			
+			<a href="#popupUpdate" data-role="button" class="transparent" data-rel="popup">Update Profile</a>
+			
+			<div data-role="popup" id="popupUpdate" data-theme="a" class="ui-corner-all">
+			<form>
+				<div style="padding:10px 20px;">
+				  <h3>Update Profile</h3>
+<!-- 		          <label for="mood" class="ui-hidden-accessible">Mood:</label>
+		          <input type="text" name="mood" id="moodField" value="" placeholder="Mood" data-theme="a" />
+ -->
+		          <label for="mood" class="select"></label>
+	   				<select name="mood" id="moodField">
+					<option selected value="">Mood</option>
+					<option value="Happy">Happy</option>
+					<option value="Sad">Sad</option>
+					<option value="Angry">Angry</option>
+					<option value="Feisty">Feisty</option>
+					<option value="Indifferent">Indifferent</option>
+				  </label>
+
+		          <label for="status" class="ui-hidden-accessible">Status:</label>
+		          <input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
+
+		    	  <a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Sign in</a>
+				</div>
+			</form>
+			</div>
+
 			<div class="imageWrapper center">
 				<img class="profilePic" src="../images/profilePicM.png"></img>
 			</div>
@@ -105,20 +145,22 @@
 				<div class="ui-block-a left">
 				<p class="bold">Mood:</p>
 				</div>
+
 				<div class="ui-block-b left">
-				<p>Happy</p>
+				<p id="myMood">Not set</p>
 				</div>
 
 				<div class="ui-block-a left">
 				<p class="bold">Status:</p>
 				</div>
 				<div class="ui-block-b left">
-				<p>Booyakasha</p>
+				<p id="myStatus">Not set</p>
 				</div>
 			</div> 
 		</div>
 
-		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p></br>
+		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p>
+			<a href="" data-role="button" class="invisible">AA</a>
 			<div class="imageWrapper center">
 				<img class="profilePic" src="../images/profilePicF.png"></img>
 			</div>
@@ -128,7 +170,7 @@
 				<p class="bold">Mood:</p>
 				</div>
 				<div class="ui-block-b left">
-				<p>Angry</p>
+				<p>Not set</p>
 				</div>
 
 
@@ -136,18 +178,20 @@
 				<p class="bold">Status:</p>
 				</div>
 				<div class="ui-block-b left">
-				<p>wuhhhhht</p>
+				<p>Not set</p>
 				</div>
 			</div> 
 		</div>
 
 		</div><!-- Two Column Grid -->
 
-		<div class="block">
+		<div class="block notificationsBox">
 		<div class="center">
 			<strong>Couple Notifications</strong>
 		</div>
-		<div class="ui-grid-a center">
+		
+
+		<div class="ui-grid-a center notificationContent">
 			
 			<div class="ui-block-a left">
 			<p class="bold">Upcoming event:</p>
@@ -185,7 +229,7 @@
 		</div>
  	</div>
 
-	<div data-role="footer" class="transparent" data-position="fixed" class="ui-bar-d transparent">
+	<div data-role="footer" data-position="fixed" class="ui-bar-d">
 	<div data-role="navbar" data-iconpos="top">
 	<ul>
 		<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
@@ -203,14 +247,9 @@
         <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
     </div>
 	<div data-role="content">
-<!--         <div id="videoHolder"></div>
-        <div id="audioHolder" style="width: 50px; height: 50px;">Play Audio</div>
-        <img id="pictureTest" style="width: 250px; height: 400px;"/>
- -->        <div id="messages">
-            
-        	<!-- <div id="myMessages"></div>
-        	<div id="otherMessages" class="floatRight"></div> -->
 
+        <div id="messages">
+        	<!--PG content goes here-->
         </div>    
 
         <div data-role="footer" data-position="fixed" class="ui-bar-d">                  

@@ -11,6 +11,9 @@
 	margin-top: 10px;
 }
 
+.bottomMargin{
+	margin-bottom: 10px;
+}
 strong{
 	text-align: center;
 }
@@ -107,7 +110,7 @@ strong{
 }
 
 .transparent{
-	/*opacity: 0.1*/
+	opacity: 0.4;
 }
 
 .ui-icon{
@@ -116,5 +119,9 @@ strong{
 
 .bold{
 	font-weight: bold;	
+}
+
+.invisible{
+	visibility: hidden;
 }
 
