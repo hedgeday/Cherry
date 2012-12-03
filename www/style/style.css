@@ -11,6 +11,17 @@
 	margin-top: 10px;
 }
 
+strong{
+	text-align: center;
+}
+
+.ui-page{
+	/*background: url('../images/gray_jean.png');
+    background-repeat:repeat;
+    background-position:center center;
+    background-attachment:scroll;*/
+}
+
 #welcomeLogo{
 	width:100px;
 	height:100px;
@@ -44,15 +55,66 @@
 	width:100%;
 }
 
+.pgImage{
+	width:90%;
+	height: 90%;
+}
+
 .rightGap{
 	/*margin-right: 5px;*/
 }
 
 .otherMsg{
+	clear: right;
+	display: inline-block;
+}
+
+.floatRight{
 	float: right;
-	clear: both;
 }
 
 .myMsg{
 	clear: both;
 }
+
+.headerText{
+	font-weight: lighter;
+}
+
+.block{
+	margin-bottom: 15px;
+	background-color: white;
+	padding: 3px;
+	box-shadow: inset 0 0 6px #E8E8E8;
+	box-shadow: 0 0 8px #E8E8E8;
+	width:100%;
+}
+
+.block > div{
+	padding-top: 12px;
+}
+
+.left{
+	text-align: left;
+	padding-left: 10px;
+	word-wrap: break-word;
+}
+
+.right{
+	text-align: right;
+	padding-right: 10px;
+	word-wrap: break-word;
+}
+
+.transparent{
+	/*opacity: 0.1*/
+}
+
+.ui-icon{
+	opacity: 1;	
+}
+
+.bold{
+	font-weight: bold;	
+}
+

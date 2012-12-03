@@ -5,7 +5,7 @@ var login = function(){
 
 login.prototype.setup = function(){
 	setTimeout(function(){$.mobile.changePage($("#home"));}, 500);
-	$('#submitSignIn').on('tap', function(){this.validateSignIn()}.bind(this));
+	// $('#submitSignIn').on('tap', function(){this.validateSignIn()}.bind(this));
 	$.mobile.page.prototype.options.backBtnTheme = "d";
 	$('#notificationWarn').on('tap', function(){$("#disclaimer").popup()});
 	$('#signUpButton').on('tap', function(){$.mobile.changePage($("#signup"));})
@@ -15,5 +15,8 @@ login.prototype.setup = function(){
                     new Playground();
                 });
 	$('#submitFriend').bind('keypress', function(e) {if (e.keyCode == 13) e.preventDefault();});
+	// $("[data-role=header]").fixedtoolbar({ tapToggle: false });
+ //    $("[data-role=footer]").fixedtoolbar({ tapToggle: false });
+
 };
 

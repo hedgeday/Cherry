@@ -1,24 +1,41 @@
 var Playground = function() {
 
-    document.addEventListener('deviceReady', function(){
-
-        $('#addText').tap(function(e) {
-            $('#newTextMessage').show();
-            $('#newTextMessage input').focus();
-        });
-        
-        $('.cancelPost').tap(function() {
-            $('#newTextMessage input').val("");
-            $('#newTextMessage').hide();
-        });
-        
-        $('#newTextMessagePost').tap(function() {
-            submitPost();
-        });
+    /*TEXTS*/
+    $('#addText').tap(function(e) {
+        $('#newTextMessage').show();
+        $('#newTextMessage input').focus();
+    });
+       
+   $('.cancelPost').tap(function() {
+        $('#newTextMessage input').val("");
+        $('#newTextMessage').hide();
+    });
     
-        $('#messageInput').bind('keypress', function(e) {
-            if (e.keyCode == 13) submitPost();
-        });
+    $('#newTextMessagePost').tap(function() {
+        submitPost();
+    }); 
+
+    $('#messageInput').bind('keypress', function(e) {
+        if (e.keyCode == 13) submitPost();
+    });
+
+    // $("[data-role=header]").fixedtoolbar({ tapToggle: true });
+    // $("[data-role=footer]").fixedtoolbar({ tapToggle: true });
+
+    function submitPost(){
+        if (!($('#messageInput').val() == '')){
+            $('#messages').append("<div class='otherMsg block'><div class='ui-grid-a'><div class='ui-block-a left'>"+ $('#newTextMessage input').val() + "</div><div class='ui-block-b right'><img class='profilePic' src='/images/profilePicM.png' /></div></div>");
+            $('#messages').append("<div class='myMsg block'><div class='ui-grid-a'><div class='ui-block-a left'><img class='profilePic' src='/images/profilePicF.png' /></div><div class='ui-block-b right'>" + $('#newTextMessage input').val() + "</div>");
+            $('#messageInput').val("");
+            $('#newTextMessage').hide();
+        }
+    };
+
+    // alert(navigator);
+
+    /*PHONE STUFF*/
+    document.addEventListener('deviceReady', function(){
+        // alert('yo!');
         
         $('#addPicture').tap(function() {
             $('#newTextMessage').hide();
@@ -35,8 +52,7 @@ var Playground = function() {
              );
             
             function success(pic) {
-                var picture = $("#pictureTest")
-                picture.attr('src', 'data:image/jpeg;base64,' + pic);
+                $("#messages").append("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div></div>");
             };
             
             function fail(msg) {
@@ -59,7 +75,7 @@ var Playground = function() {
             };
             
             function fail(msg) {
-                alert(msg);
+                // alert(msg);
             };
         });
         
@@ -73,22 +89,19 @@ var Playground = function() {
              );
             
             function success(audioData){
+                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p></div>");
                 var file = new Media(audioData[0].fullPath); 
-                $("#audioHolder").click(function(){
+                $(".playAudio").click(function(){
                     file.play();
                 });         
             };
             
             function fail(msg) {
-                alert(msg);
+                // alert(msg);
             };            
             
         });
     
-        function submitPost(){
-            $('#messages').append("<div class='otherMsg'>"+ $('#newTextMessage input').val() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img class='profilePic' src='/images/profilePicM.png' /> </div>");
-            $('#messages').append("<div class='myMsg'><img class='profilePic' src='/images/profilePicF.png' />" + $('#newTextMessage input').val() + "</div>");
-            $('#messageInput').val("");
-        };
+        
     });
 };

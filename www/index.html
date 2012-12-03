@@ -24,10 +24,10 @@
 <style>
 
 .ui-page {
-	background: url(images/gray_jean.png);
+	/*background: url(images/gray_jean.png);
     background-repeat:repeat;
     background-position:center center;
-    background-attachment:scroll;
+    background-attachment:scroll;*/
 }
 
 </style>
@@ -36,12 +36,11 @@
 
 <div data-role="page" id="splash"> 
     <div data-role="content" class='splashImage topMargin'>  
-        <img src="./images/Cherry_logo1.gif" />
+        <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
     </div>
 </div>
 
 <div data-role="page" data-title="Home" id="home" class='homeBG'>
-	<div data-role="header" class="ui-bar ui-bar-d"><h1>Cherry</h1></div>
 	<div data-role="content">
 		<div class='splashImage'>
 			 <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
@@ -91,49 +90,107 @@
 </div>
 
 <div data-role="page" data-title="Sign up" id="homescreen">
-	<div data-role="header" class="ui-bar-d"><h1>Profile</h1></div>
+	<!-- <div data-role="header" class="ui-bar-d"><h3 class="headerText">Profile</h3></div> -->
 	<div data-role="content">
 		
-		<div class="ui-grid-a">
+		<div class="ui-grid-a block">
 		
 		<div class="ui-block-a center"><strong>Person A</strong></br><p>ab/cd/efgh</p></br>
 			<div class="imageWrapper center">
 				<img class="profilePic" src="../images/profilePicM.png"></img>
 			</div>
-			<p>Mood: Happy</p>
-			<p>Status: Blah blah fuck you</p>
+
+			<div class="ui-grid-a center">
+			
+				<div class="ui-block-a left">
+				<p class="bold">Mood:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>Happy</p>
+				</div>
+
+				<div class="ui-block-a left">
+				<p class="bold">Status:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>Booyakasha</p>
+				</div>
+			</div> 
 		</div>
-		
+
 		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p></br>
-			<img class="profilePic" src="../images/profilePicF.png"></img>
-			<p>Mood: Angry</p>
-			<p>Status: Whatevah.</p>
+			<div class="imageWrapper center">
+				<img class="profilePic" src="../images/profilePicF.png"></img>
+			</div>
+			<div class="ui-grid-a center">
+			
+				<div class="ui-block-a left">
+				<p class="bold">Mood:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>Angry</p>
+				</div>
+
+
+				<div class="ui-block-a left">
+				<p class="bold">Status:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>wuhhhhht</p>
+				</div>
+			</div> 
 		</div>
-		
+
 		</div><!-- Two Column Grid -->
 
-		<div class="ui-grid center topMargin">
+		<div class="block">
+		<div class="center">
 			<strong>Couple Notifications</strong>
-			<p>Upcoming event: 1 year anniversary</p>
+		</div>
+		<div class="ui-grid-a center">
+			
+			<div class="ui-block-a left">
+			<p class="bold">Upcoming event:</p>
+			</div>
+			<div class="ui-block-b right">
+			<p>One year Anniversary</p>
+			</div>
 		</div><!-- One Column Grid -->
+		</div>
 
-		<div class="ui-grid center">
+		<div class="block">
+			<div class="center">
 			<strong>Couple Statistics</strong>
-			<p>Started dating: ab/cd/efgh</p>
-			<p>Time spent together: 40 weeks</p>
-			<p>Number of break-ups: 3</p>
-			<p>Hours spent on this app:</p>
-			<p>Person A: x | Person B: y</p>
+			</div>
+		<div class="ui-grid-a">
+			<div class="ui-block-a left">
+				<p class="bold">Started dating:</p>
+			</div>
+			<div class="ui-block-b right">
+				<p>ab/cd/efgh</p>
+			</div>
+			<div class="ui-block-a left">
+			<p class="bold">Time spent together:</p> 
+			</div>
+			<div class="ui-block-b right">	
+			<p>40 weeks</p>
+			</div>
+			<div class="ui-block-a left">
+			<p class="bold">Number of break-ups:</p> 
+			</div>
+			<div class="ui-block-b right">	
+			<p>3</p>
+			</div>
 		</div><!-- One Column Grid -->
-
+		</div>
  	</div>
 
-	<div data-role="footer" data-position="fixed" class="ui-bar-d">
+	<div data-role="footer" class="transparent" data-position="fixed" class="ui-bar-d transparent">
 	<div data-role="navbar" data-iconpos="top">
 	<ul>
 		<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
 		<li><a href="#playground" data-icon="chat">Playground</a></li>
-		<li><a href="#travel" data-icon="plane">Travel</a></li>
+		<!-- <li><a href="#travel" data-icon="plane">Travel</a></li> -->
 	</ul>
 	</div><!-- /navbar -->
 	</div>
@@ -146,10 +203,10 @@
         <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
     </div>
 	<div data-role="content">
-        <div id="videoHolder"></div>
+<!--         <div id="videoHolder"></div>
         <div id="audioHolder" style="width: 50px; height: 50px;">Play Audio</div>
         <img id="pictureTest" style="width: 250px; height: 400px;"/>
-        <div id="messages">
+ -->        <div id="messages">
             
         	<!-- <div id="myMessages"></div>
         	<div id="otherMessages" class="floatRight"></div> -->
@@ -174,28 +231,7 @@
             </div><!-- /navbar -->           		         
         </div>
  	</div>
-</div>
-
-<div data-role="page" data-title="travel" id="travel">
-    <div data-role="header" data-position="fixed" class="ui-bar-d">
-        <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
-        <h1>Plan a trip</h1>
-        <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
-    </div>
-	<div data-role="content">
-        
-
-
-        <div data-role="footer" data-position="fixed" class="ui-bar-d">                  
-    	    
-    	    <div data-role="navbar">
-                <ul>
-                </ul>
-            </div><!-- /navbar -->           		         
-        </div>
- 	</div>
-</div>
-
+</div> 
 
 </body>
 </html>
