@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/style/style.css" > 
 	<link rel="stylesheet" href="/style/jqm-icon-pack-2.0-original.css">
 	<link rel="stylesheet" href="/style/jqm-icon-pack-2.1.2-fa.css" />
-	<link rel="stylesheet" href="themes/cherry-theme.min.css" />
+	<link rel="stylesheet" href="themes/cherry-theme-alt.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <script src="/scripts/cordova-2.1.0.ios.js"></script>
@@ -55,7 +55,7 @@
 			<input type="password" name="passwordInput" id="passwordInput" value="" placeholder="Password"/>
 			</div>
 		</form>
-		<a href="#homescreen" id="submitSignIn" data-role="button" data-icon="arrow-r" data-iconpos="right">Sign In</a>
+		<a href="#homescreen" id="submitSignIn" data-role="button" data-icon="arrow-right" data-iconpos="right">Sign In</a>
 		<p class='center'>Don't have an account? <a id="signUpButton">Sign up!</a></p>
  	</div>
 </div>
@@ -89,6 +89,14 @@
 			<input type="date" name="bdInput" id="birthdayInput" value="" placeholder=""/>
 		</div>
 		<div data-role="fieldcontain" class="ui-hide-label">
+            <label for="gender" class="select"></label>
+			<select name="gender" data-icon="arrow-down" id="genderInput">
+			<option selected value="">Gender</option>
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
 			<label for="sigOtherEmail" class="select"></label>			
 			<input type="email" name="otherEmailInput" id="otherEmailInput" value="" placeholder="Your Significant other's Email"/>
 		</div>
@@ -105,21 +113,17 @@
 	<!-- <div data-role="header" class="ui-bar-d"><h3 class="headerText">Profile</h3></div> -->
 	<div data-role="content">
 		
-		<div class="ui-grid-a block">
+		<div class="ui-grid-a block redBG">
 		
-		<div class="ui-block-a center"><strong id="myName">Person A</strong></br><p id="myBD">ab/cd/efgh</p>
-			
-			<a href="#popupUpdate" data-role="button" class="transparent" data-rel="popup">Update Profile</a>
-			
+		<div class="ui-block-a center"><strong id="myName">Person A</strong></br>
+						
 			<div data-role="popup" id="popupUpdate" data-theme="a" class="ui-corner-all">
 			<form>
 				<div style="padding:10px 20px;">
 				  <h3>Update Profile</h3>
-<!-- 		          <label for="mood" class="ui-hidden-accessible">Mood:</label>
-		          <input type="text" name="mood" id="moodField" value="" placeholder="Mood" data-theme="a" />
- -->
+
 		          <label for="mood" class="select"></label>
-	   				<select name="mood" id="moodField">
+	   				<select name="mood" data-icon="heart-empty" id="moodField">
 					<option selected value="">Mood</option>
 					<option value="Happy">Happy</option>
 					<option value="Sad">Sad</option>
@@ -131,13 +135,13 @@
 		          <label for="status" class="ui-hidden-accessible">Status:</label>
 		          <input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
 
-		    	  <a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Sign in</a>
+		    	  <a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Submit</a>
 				</div>
 			</form>
 			</div>
 
-			<div class="imageWrapper center">
-				<img class="profilePic" src="../images/profilePicM.png"></img>
+			<div class="imageWrapper">
+				<img class="profilePic" src="../images/profilePicM.jpg"></img>
 			</div>
 
 			<div class="ui-grid-a center">
@@ -157,10 +161,10 @@
 				<p id="myStatus">Not set</p>
 				</div>
 			</div> 
+			<a href="#popupUpdate" data-role="button" class="transparent" data-rel="popup">Update</a>
 		</div>
 
-		<div class="ui-block-b center"><strong>Person B</strong></br><p>ab/cd/efgh</p>
-			<a href="" data-role="button" class="invisible">AA</a>
+		<div class="ui-block-b center"><strong>Person B</strong></br>
 			<div class="imageWrapper center">
 				<img class="profilePic" src="../images/profilePicF.png"></img>
 			</div>
@@ -180,12 +184,13 @@
 				<div class="ui-block-b left">
 				<p>Not set</p>
 				</div>
-			</div> 
+			</div>
+			<a href="" data-role="button" class="invisible"></a> 
 		</div>
 
 		</div><!-- Two Column Grid -->
 
-		<div class="block notificationsBox">
+		<div class="block notificationsBox redBG">
 		<div class="center">
 			<strong>Couple Notifications</strong>
 		</div>
@@ -202,7 +207,7 @@
 		</div><!-- One Column Grid -->
 		</div>
 
-		<div class="block">
+		<div class="block redBG">
 			<div class="center">
 			<strong>Couple Statistics</strong>
 			</div>
@@ -244,8 +249,8 @@
     <div data-role="header" data-position="fixed" class="ui-bar-d">
         <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
         <h1>Playground</h1>
-        <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
-    </div>
+<!--         <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
+ -->    </div>
 	<div data-role="content">
 
         <div id="messages">
@@ -256,8 +261,14 @@
     	    
             <div id="newTextMessage" data-transition="slidedown" style='display: none;'>
                 <input id="messageInput" type='text'>
-                    <a id="newTextMessagePost" href="#" data-role="button" data-theme="b">Post</a>
-                    <a class="cancelPost" href="#" data-icon="arrow-d" data-iconpos="right" data-role="button">Cancel</a>
+                <div class="ui-grid-a">
+					<div class="ui-block-a">
+                    <a id="newTextMessagePost" href="#" data-role="button">Post</a>
+                    </div>
+                    <div class="ui-block-b">
+                    <a class="cancelPost" href="#" data-role="button">Cancel</a>
+            		</div>
+            	</div>
             </div> <!-- /formDiv -->
 
     	    <div data-role="navbar">

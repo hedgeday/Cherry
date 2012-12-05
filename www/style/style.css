@@ -7,6 +7,13 @@
 	width: 80%;
 }
 
+.redBG{
+	background: url(../images/cherry1.jpg) no-repeat center center fixed;
+    background-size:cover;
+    color: white;
+    /*filter:blur(20px);*/
+}
+
 .topMargin{
 	margin-top: 10px;
 }
@@ -43,16 +50,24 @@ strong{
 }
 
 .profilePic{
-	margin-top: 10px;
+	/*margin-top: 10px;*/
+	border-radius: 50%;
+	/*padding-right: 3px;*/
 	width:100px;
 	height:100px;
 }
 
+.profilePicSmall{
+	margin-top: 10px;
+	width:50px;
+	height:50px;
+}
+
 .imageWrapper{
-/*	border-style: solid;
-	border-width: 2px;
-	border-color: black;
-*/}
+	margin-top: 15px;
+	display: inline-block;
+	border-radius: 50%;
+}
 
 .fullWidth{
 	width:100%;
@@ -85,11 +100,12 @@ strong{
 }
 
 .block{
+	margin-left: -2px;
 	margin-bottom: 15px;
 	background-color: white;
 	padding: 3px;
 	box-shadow: inset 0 0 6px #E8E8E8;
-	box-shadow: 0 0 8px #E8E8E8;
+	box-shadow: 0 0 20px #6E6A6C;
 	width:100%;
 }
 
@@ -109,6 +125,10 @@ strong{
 	word-wrap: break-word;
 }
 
+.bottomPadding{
+	padding-bottom: 15px;
+}
+
 .transparent{
 	opacity: 0.4;
 }
@@ -125,3 +145,11 @@ strong{
 	visibility: hidden;
 }
 
+.time{
+	font-family: Arial;
+	font-size: 10px;
+	color: gray;
+}
+
+.ui-grid-a > .chatPic { width: 30% }
+.ui-grid-a > .chatText { width: 70%; } 

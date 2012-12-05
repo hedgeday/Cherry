@@ -58,7 +58,8 @@ login.prototype.setup = function(){
 	/* End of section*/
 
 	function validateInfoForm(){
-		var unFlag, pFlag, eFlag, bFlag, oeFlag, dFlag = false;
+
+		var unFlag, gFlag, pFlag, eFlag, bFlag, oeFlag, dFlag = false;
 		if ($('#unInput').val() == ""){
 			$('#unInput').css('background-color', '#DEE0E0');
 			unFlag = true;
@@ -80,12 +81,12 @@ login.prototype.setup = function(){
 
 		if ($('#nInput').val() == ""){
 			$('#nInput').css('background-color', '#DEE0E0');
-			unFlag = true;
+			nFlag = true;
 		}
 
 		else {
 			$('#nInput').css('background-color', 'white');
-			unFlag = false;
+			nFlag = false;
 		}
 
 		if (!isEmail($('#emailInput').val())){
@@ -97,7 +98,6 @@ login.prototype.setup = function(){
 			eFlag = false;
 		}
 
-
 		if ($('#birthdayInput').val() == ""){
 			$('#birthdayInput').css('background-color', '#DEE0E0');
 			bFlag = true;
@@ -105,6 +105,15 @@ login.prototype.setup = function(){
 		else {
 			$('#birthdayInput').css('background-color', 'white');
 			bFlag = false;
+		}
+
+		if ($('#genderInput').val() == ""){
+			$('#otherEmailInput').css('background-color', '#DEE0E0');
+			gFlag = true;
+		}
+		else {
+			$('#otherEmailInput').css('background-color', 'white');
+			gFlag = false;
 		}
 
 		if (!isEmail($('#otherEmailInput').val())){
@@ -125,7 +134,7 @@ login.prototype.setup = function(){
 			dFlag = false;
 		}
 
-		errorFlag = unFlag || pFlag || eFlag || bFlag || oeFlag || dFlag; 
+		errorFlag = unFlag || nFlag || gFlag || pFlag || eFlag || bFlag || oeFlag || dFlag; 
 
 		if (!errorFlag) {
 			location.replace('./#homescreen');
@@ -142,4 +151,30 @@ login.prototype.setup = function(){
 		if (str.indexOf('.') < 0) return false; 
 		return true;
 	}
+
+
 };
+
+
+	function timeSpentTogether(){
+		var mins=1000*60;
+		var hrs=mins*60;
+		var dys=hrs*24;
+		var yrs=dys*365;
+		if (!($('#startDateInput').val() == "")){
+			var sdInput = $('#startDateInput').val();
+			var year = parseInt(sdInput.substring(0,4));
+			console.log('years:' + year);
+			var month = parseInt(sdInput.substring(5,7));
+			console.log('months:' + month);
+			var date = parseInt(sdInput.substring(8));
+			console.log('days:' + date);
+			var startDate = new Date(year, month+1, date, 0, 0);
+			console.log('startDate:' + startDate);
+			var current = new Date();
+			console.log('current:'+ current);
+			console.log(current.getTime());
+			var diff = current.getTime() - startDate.getTime();
+			alert(diff/dys);
+		}
+	}
