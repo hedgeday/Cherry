@@ -24,8 +24,12 @@ var Playground = function() {
 
     function submitPost(){
         if (!($('#messageInput').val() == '')){
-            $('#messages').append("<div class='otherMsg block'><div class='ui-grid-a'><div class='ui-block-a left'>"+ $('#newTextMessage input').val() + "</div><div class='ui-block-b right'><img class='profilePic' src='/images/profilePicM.png' /></div></div>");
-            $('#messages').append("<div class='myMsg block'><div class='ui-grid-a'><div class='ui-block-a left'><img class='profilePic' src='/images/profilePicF.png' /></div><div class='ui-block-b right'>" + $('#newTextMessage input').val() + "</div>");
+            var currentDate = new Date();
+            console.log(currentDate);
+            var myMsg = $("<div class='myMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatPic'><img class='profilePicSmall' src='/images/profilePicF.png' /></div><div class='ui-block-b right chatText'>" + $('#newTextMessage input').val() + "</div></div><p class='center time'>Posted on "+currentDate+"</p></div>");      
+            var otherMsg = $("<div class='otherMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatText'>"+ $('#newTextMessage input').val() + "</div><div class='ui-block-b right chatPic'><img class='profilePicSmall' src='/images/profilePicM.jpg' /></div></div><p class='center time'>Posted on "+currentDate+"</p></div>");      
+            $('#messages').append(otherMsg.hide().fadeIn(500));      
+            $('#messages').append(myMsg.hide().fadeIn(500));
             $('#messageInput').val("");
             $('#newTextMessage').hide();
         }
@@ -53,7 +57,8 @@ var Playground = function() {
             
                 
             function drawMap(lat, lon) {
-                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div></div>");           
+                var currentDate = new Date();
+                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");           
             };
         });
         
@@ -80,7 +85,9 @@ var Playground = function() {
              );
             
             function success(pic) {
-                $("#messages").append("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div></div>");
+                var currentDate = new Date();
+                var block = $("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");
+                $("#messages").append(block.hide().fadeIn(500));
             };
             
             function fail(msg) {
@@ -117,7 +124,8 @@ var Playground = function() {
              );
             
             function success(audioData){
-                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p></div>");
+                var currentDate = new Date();
+                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p><p class='center time'>Posted on "+currentDate+"</p></div>");
                 var file = new Media(audioData[0].fullPath); 
                 $(".playAudio").click(function(){
                     file.play();
