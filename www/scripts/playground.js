@@ -57,17 +57,25 @@ var Playground = function() {
             };
         });
         
-        $('#addPicture').tap(function() {
+        $('#cameraSource').tap(function() {
             $('#newTextMessage').hide();
             
-            var destinationType = navigator.camera.DestinationType;
-            var pictureSource = navigator.camera.PictureSourceType;
+            getPhoto(navigator.camera.PictureSourceType.CAMERA);
+        }); 
         
+        $('#librarySource').tap(function() {
+            $('#newTextMessage').hide();
+            
+            getPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
+        }); 
+        
+        function getPhoto(source){
+          
             navigator.camera.getPicture(success, fail,
                 {
                     quality: 75,
-                    destinationType: destinationType.DATA_URL,
-                    sourceType: pictureSource
+                    destinationType: navigator.camera.DestinationType.DATA_URL,
+                    sourceType: source
                 }
              );
             
@@ -78,7 +86,7 @@ var Playground = function() {
             function fail(msg) {
                 alert(msg);
             };
-        });
+        };
         
         $('#addVideo').tap(function() {
             $('#newTextMessage').hide();

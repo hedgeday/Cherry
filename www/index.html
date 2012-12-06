@@ -252,7 +252,7 @@
 <!--         <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
  -->    </div>
 	<div data-role="content">
-
+        
         <div id="messages">
         </div>    
 
@@ -273,7 +273,7 @@
                 <ul>
                     <li><a id="addText" href="#playground" data-icon="pencil">Text</a></li>
                     <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
-                    <li><a id="addPicture" href="#playground" data-icon="camera">Picture</a></li>
+                    <li><a id="addPicture" data-rel="dialog" href="#pictureSource" data-icon="camera">Picture</a></li>
                     <li><a id="addVideo" href="#playground" data-icon="facetime-video">Video</a></li>
                     <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
                 </ul>
@@ -281,6 +281,15 @@
         </div>
  	</div>
 </div> 
+
+<div data-role="page" data-title="pictureSource" id="pictureSource">
+	<div data-role="content">
+        <p>Choose the source for the photo</p>
+        <a id="librarySource" href="#playground" data-role="button" data-theme="b">Library</a>
+        <a id="cameraSource" href="#playground" data-role="button" data-theme="b">Camera</a>
+        <a href="#playground" data-role="button">Cancel</a>
+ 	</div>
+</div>
 
 </body>
 </html>
