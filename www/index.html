@@ -18,9 +18,9 @@
     	window.onload = function(){
             window.util = new Util();
             window.util.patchFnBind();
-    		new login();
+    		new login();    
     	}
-    </script>
+    </script> 
 <style>
 
 .ui-page {
@@ -254,11 +254,9 @@
 	<div data-role="content">
 
         <div id="messages">
-        	<!--PG content goes here-->
         </div>    
 
-        <div data-role="footer" data-position="fixed" class="ui-bar-d">                  
-    	    
+        <div data-role="footer" data-position="fixed" class="ui-bar-d"> 
             <div id="newTextMessage" data-transition="slidedown" style='display: none;'>
                 <input id="messageInput" type='text'>
                 <div class="ui-grid-a">
@@ -277,6 +275,7 @@
                     <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
                     <li><a id="addPicture" href="#playground" data-icon="camera">Picture</a></li>
                     <li><a id="addVideo" href="#playground" data-icon="facetime-video">Video</a></li>
+                    <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
                 </ul>
             </div><!-- /navbar -->           		         
         </div>

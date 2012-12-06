@@ -24,22 +24,38 @@ var Playground = function() {
 
     function submitPost(){
         if (!($('#messageInput').val() == '')){
-            var currentDate = new Date();
-            console.log(currentDate);
-            var myMsg = $("<div class='myMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatPic'><img class='profilePicSmall' src='/images/profilePicF.png' /></div><div class='ui-block-b right chatText'>" + $('#newTextMessage input').val() + "</div></div><p class='center time'>Posted on "+currentDate+"</p></div>");
-            var otherMsg = $("<div class='otherMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatText'>"+ $('#newTextMessage input').val() + "</div><div class='ui-block-b right chatPic'><img class='profilePicSmall' src='/images/profilePicM.jpg' /></div></div><p class='center time'>Posted on "+currentDate+"</p></div>");
-            $('#messages').append(otherMsg.hide().fadeIn(500));
-            $('#messages').append(myMsg.hide().fadeIn(500));
+            $('#messages').append("<div class='otherMsg block'><div class='ui-grid-a'><div class='ui-block-a left'>"+ $('#newTextMessage input').val() + "</div><div class='ui-block-b right'><img class='profilePic' src='/images/profilePicM.png' /></div></div>");
+            $('#messages').append("<div class='myMsg block'><div class='ui-grid-a'><div class='ui-block-a left'><img class='profilePic' src='/images/profilePicF.png' /></div><div class='ui-block-b right'>" + $('#newTextMessage input').val() + "</div>");
             $('#messageInput').val("");
             $('#newTextMessage').hide();
         }
     };
 
-    // alert(navigator);
 
     /*PHONE STUFF*/
     document.addEventListener('deviceReady', function(){
-        // alert('yo!');
+                
+            //google maps
+        $("#addLocation").tap(function() {
+            $('#newTextMessage').hide();
+            
+            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true});
+            
+            function success(pos){
+                var lat = pos.coords.latitude;
+                var lon = pos.coords.longitude;
+                drawMap(lat, lon);
+            };
+            
+            function fail(error){
+                $("#map_canvas").html("<p>Code:" + error.code + "</p>");
+            };   
+            
+                
+            function drawMap(lat, lon) {
+                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div></div>");           
+            };
+        });
         
         $('#addPicture').tap(function() {
             $('#newTextMessage').hide();
@@ -56,9 +72,7 @@ var Playground = function() {
              );
             
             function success(pic) {
-                var currentDate = new Date();
-                var block = $("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");
-                $("#messages").append(block.hide().fadeIn(500));
+                $("#messages").append("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div></div>");
             };
             
             function fail(msg) {
@@ -95,8 +109,7 @@ var Playground = function() {
              );
             
             function success(audioData){
-                var currentDate = new Date();
-                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p><p class='center time'>Posted on "+currentDate+"</p></div>");
+                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p></div>");
                 var file = new Media(audioData[0].fullPath); 
                 $(".playAudio").click(function(){
                     file.play();
@@ -108,7 +121,7 @@ var Playground = function() {
             };            
             
         });
-    
         
-    });
+    }, false);//event listener           
+    
 };
