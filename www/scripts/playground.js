@@ -1,24 +1,9 @@
 var Playground = function() {
-
-    //Add text message
-    $('#addText').tap(function(e) {
-        $('#newTextMessage').show();
-        $('#newTextMessage input').focus();
-    });
    
    //cancels text message    
    $('.cancelPost').tap(function() {
         $('#newTextMessage input').val("");
         $('#newTextMessage').hide();
-    });
-    
-    $('#newTextMessagePost').tap(function() {
-        submitPost();
-    }); 
-
-    //submit on 'enter'
-    $('#messageInput').bind('keypress', function(e) {
-        if (e.keyCode == 13) submitPost();
     });
 
     //submits new text message and creates card on DOM
@@ -144,42 +129,6 @@ var Playground = function() {
                 $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");         
             };
         });
-        
-        //allows user to take new photo with camera
-        $('#cameraSource').tap(function() {
-            $('#newTextMessage').hide();
-            
-            getPhoto(navigator.camera.PictureSourceType.CAMERA);
-        }); 
-        
-        //allows user to select photo from library
-        $('#librarySource').tap(function() {
-            $('#newTextMessage').hide();
-            
-            getPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
-        }); 
-        
-        //retrieves photo based on user's input selection
-        function getPhoto(source){
-          
-            navigator.camera.getPicture(success, fail,
-                {
-                    quality: 75,
-                    destinationType: navigator.camera.DestinationType.DATA_URL,
-                    sourceType: source
-                }
-             );
-            
-            function success(pic) {
-                var currentDate = new Date();
-                var block = $("<div class='block'><p class='center'>You posted a picture.</p><div class='imageWrapper center'><img src='data:image/jpeg;base64,"+pic+"' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");
-                $("#messages").append(block.hide().fadeIn(500));
-            };
-            
-            function fail(msg) {
-                alert(msg);
-            };
-        };
         
         //allows user to record audio message        
         $('#addVoice').tap(function() {

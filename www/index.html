@@ -12,10 +12,12 @@
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <script src="/scripts/cordova-2.1.0.ios.js"></script>
     <script src="/scripts/app.js"></script>
+	<script src='/scripts/clientSide.js'></script>
 	<script src="/scripts/playground.js"></script>
     <script>
     	window.onload = function(){
-    		new login();    
+    		new login(); 
+            new App();   
     	}
     </script> 
 <style>
@@ -52,7 +54,7 @@
 			<input type="password" name="passwordInput" id="passwordInput" value="" placeholder="Password"/>
 			</div>
 		</form>
-		<a href="#homescreen" id="submitSignIn" data-role="button" data-icon="arrow-right" data-iconpos="right">Sign In</a>
+		<a href="" id="submitSignIn" data-role="button" data-icon="arrow-right" data-iconpos="right">Sign In</a>
 		<p class='center'>Don't have an account? <a id="signUpButton">Sign up!</a></p>
  	</div>
 </div>
