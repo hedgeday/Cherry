@@ -1,11 +1,12 @@
 var Playground = function() {
 
-    /*TEXTS*/
+    //Add text message
     $('#addText').tap(function(e) {
         $('#newTextMessage').show();
         $('#newTextMessage input').focus();
     });
-       
+   
+   //cancels text message    
    $('.cancelPost').tap(function() {
         $('#newTextMessage input').val("");
         $('#newTextMessage').hide();
@@ -15,12 +16,14 @@ var Playground = function() {
         submitPost();
     }); 
 
+    //submit on 'enter'
     $('#messageInput').bind('keypress', function(e) {
         if (e.keyCode == 13) submitPost();
     });
 
+    //submits new text message and creates card on DOM
     function submitPost(){
-        if (!($('#messageInput').val() == '')){
+        if (!($('#messageInput').val() === '')){
             var currentDate = new Date();
             console.log(currentDate);
             var myMsg = $("<div class='myMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatPic'><img class='profilePicSmall' src='/images/profilePicF.png' /></div><div class='ui-block-b right chatText'>" + $('#newTextMessage input').val() + "</div></div><p class='center time'>Posted on "+currentDate+"</p></div>");      
@@ -32,7 +35,8 @@ var Playground = function() {
         }
     };
 
-    $("#addCanvas").on('click',function(){
+    //draws canvas
+    $("#addCanvas").on('tap',function(){
         var width = $('#drawCanvas').width();
         var height = $('#drawCanvas').height();
         var canvas = $('#drawCanvas'); 
@@ -42,14 +46,15 @@ var Playground = function() {
         ctx.fillRect(0,0,350,350);
         ctx.strokeStyle = 'rgb(0,0,0)';
         
+        //returns user's xy coordinates on canvas
         function getXY(ev){
-            // alert(ev);
             return {
                 x: ev.pageX,
                 y: ev.pageY
             };
-        }
+        };
         
+        //allow user to draw line
         canvas.bind('touchstart', function (event) {   
             var xy = getXY(event.originalEvent.touches[0]);  
             ctx.beginPath();
@@ -72,6 +77,7 @@ var Playground = function() {
             return false;
         });
         
+        //saves current canvas as image and adds to DOM on card
         $("#submitCanvas").tap(function() {
             var currentDate = new Date();
             var img = document.getElementById("drawCanvas").toDataURL("image/png");
@@ -80,11 +86,14 @@ var Playground = function() {
             $("#submitCanvas").unbind();    
         });
                         
+        //allow user to change color of canvas stroke
         $("#colorPicker input").change(function(e) {
+            //remove old listeners
             $("#drawCanvas").unbind();
         
             ctx.strokeStyle = e.target.value.toString();
             
+            //add new listeners to draw lines
             canvas.bind('touchstart', function (event) {
                 var xy = getXY(event.originalEvent.touches[0]);
                 ctx.beginPath();
@@ -110,10 +119,10 @@ var Playground = function() {
     });
 
 
-    /*PHONE STUFF*/
+    /*PHONEGAP STUFF*/
     document.addEventListener('deviceReady', function(){
         
-        //google maps
+        //gets user's current location and adds to DOM on card
         $("#addLocation").tap(function() {
             $('#newTextMessage').hide();
             
@@ -129,25 +138,28 @@ var Playground = function() {
                 alert(error.code);
             };   
             
-                
+            //request to Google Maps    
             function drawMap(lat, lon) {
                 var currentDate = new Date();
                 $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");         
             };
         });
         
+        //allows user to take new photo with camera
         $('#cameraSource').tap(function() {
             $('#newTextMessage').hide();
             
             getPhoto(navigator.camera.PictureSourceType.CAMERA);
         }); 
         
+        //allows user to select photo from library
         $('#librarySource').tap(function() {
             $('#newTextMessage').hide();
             
             getPhoto(navigator.camera.PictureSourceType.PHOTOLIBRARY);
         }); 
         
+        //retrieves photo based on user's input selection
         function getPhoto(source){
           
             navigator.camera.getPicture(success, fail,
@@ -169,25 +181,7 @@ var Playground = function() {
             };
         };
         
-        // $('#addVideo').tap(function() {
-        //     $('#newTextMessage').hide();
-            
-        //      navigator.device.capture.captureVideo(success, fail,
-        //         {
-        //             limit: 1     
-        //         }   
-        //      );
-            
-        //     function success(vidData){
-        //         alert(vidData[0].type);
-        //         $("#videoHolder").html("<video width='250' height='300' controls='controls'><source src='" + vidData[0].fullPath + "' type='" + vidData[0].type + "'></video>");                
-        //     };
-            
-        //     function fail(msg) {
-        //         // alert(msg);
-        //     };
-        // });
-        
+        //allows user to record audio message        
         $('#addVoice').tap(function() {
             $('#newTextMessage').hide();
 
@@ -197,21 +191,22 @@ var Playground = function() {
                 }   
              );
             
+            //adds audio to the DOM on card
             function success(audioData){
                 var currentDate = new Date();
                 $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p><p class='center time'>Posted on "+currentDate+"</p></div>");
                 var file = new Media(audioData[0].fullPath); 
-                $(".playAudio").click(function(){
+                $(".playAudio").tap(function(){
                     file.play();
                 });         
             };
             
             function fail(msg) {
-                // alert(msg);
+                alert(msg);
             };            
             
         });
         
-    }, false);//event listener           
+    }, false);          
     
 };
