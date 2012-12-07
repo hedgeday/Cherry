@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="themes/cherry-theme-alt.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-    <script src="/scripts/cordova-2.1.0.android.js"></script>
+    <script src="/scripts/cordova-2.1.0.ios.js"></script>
     <script src="/scripts/util.js"></script>
     <script src="/scripts/app.js"></script>
 	<script src="/scripts/playground.js"></script>
@@ -274,7 +274,7 @@
                     <li><a id="addText" href="#playground" data-icon="comment">Text</a></li>
                     <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
                     <li><a id="addPicture" data-rel="dialog" href="#pictureSource" data-icon="camera">Picture</a></li>
-                    <li><a id="addCanvas" href="#canvasPage" data-icon="pencil">Draw</a></li>
+                    <li><a id="addCanvas" href="#canvasPage" data-icon="pencil">Sketch</a></li>
                     <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
                 </ul>
             </div><!-- /navbar -->           		         
@@ -293,12 +293,27 @@
 
 <div data-role="page" data-title="canvasPage" id="canvasPage">
     <div data-role="header" data-position="fixed" class="ui-bar-d">
-        <a href="#playground" data-icon="arrow-left" class="ui-btn-left">Back</a>
+        <a href="#playground" data-icon="remove" class="ui-btn-left">Cancel</a>
+        <a href="#playground" id="submitCanvas" data-icon="ok" class="ui-btn-right">Submit</a>
         <h1>Draw</h1>
 	</div>
 	<div data-role="content">
 		<div class="centerdiv">
 			<canvas id="drawCanvas" width='300px' height='300px'></canvas>
+            <form>
+                <fieldset id="colorPicker" data-type="horizontal" data-role="controlgroup">
+                    <input class="btn-active" type="radio" name="radio-choice" id="radio-choice-1" value="black" checked="checked" />
+                    <label for="radio-choice-1">Black</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-2" value="blue"  />
+                    <label for="radio-choice-2">Blue</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-3" value="red"  />
+                    <label for="radio-choice-3">Red</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-4" value="green"  />
+                    <label for="radio-choice-4">Green</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-5" value="yellow"  />
+                    <label for="radio-choice-5">Yellow</label>
+                </fieldset>
+            </form>
 		</div>
 	</div>
 </div>

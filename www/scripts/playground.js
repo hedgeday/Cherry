@@ -34,15 +34,13 @@ var Playground = function() {
 
     $("#addCanvas").on('click',function(){
         var width = $('#drawCanvas').width();
-        console.log(width);
         var height = $('#drawCanvas').height();
         var canvas = $('#drawCanvas'); 
-        console.log(height);
         var ctx = document.getElementById('drawCanvas').getContext('2d');
         ctx.fillStyle = 'rgb(255,255,255)';
         
         ctx.fillRect(0,0,350,350);
-        ctx.fillStyle = 'rgb(0,0,0)';
+        ctx.strokeStyle = 'rgb(0,0,0)';
         
         function getXY(ev){
             // alert(ev);
@@ -51,12 +49,13 @@ var Playground = function() {
                 y: ev.pageY
             };
         }
-
-        canvas.bind('touchstart', function (event) {
-            var xy = getXY(event.originalEvent.touches[0]);
+        
+        canvas.bind('touchstart', function (event) {   
+            var xy = getXY(event.originalEvent.touches[0]);  
+            ctx.beginPath();
             ctx.moveTo(xy.x, xy.y - 60);
             event.preventDefault();
-            return false;
+            return false;  
         });
         
         canvas.bind('touchmove', function (event) {
@@ -65,9 +64,50 @@ var Playground = function() {
             ctx.stroke();
             event.preventDefault();
             return false;
+        }); 
+        
+        canvas.bind('touchend', function(event) {
+            ctx.closePath(); 
+            event.preventDefault();
+            return false;
         });
-
-    })
+        
+        $("#submitCanvas").tap(function() {
+            var currentDate = new Date();
+            var img = document.getElementById("drawCanvas").toDataURL("image/png");
+            var block = $("<div class='block'><p class='center'>You posted a sketch.</p><div class='imageWrapper center'><img src='"+img+"' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");
+            $("#messages").append(block.hide().fadeIn(500));
+            $("#submitCanvas").unbind();    
+        });
+                        
+        $("#colorPicker input").change(function(e) {
+            $("#drawCanvas").unbind();
+        
+            ctx.strokeStyle = e.target.value.toString();
+            
+            canvas.bind('touchstart', function (event) {
+                var xy = getXY(event.originalEvent.touches[0]);
+                ctx.beginPath();
+                ctx.moveTo(xy.x, xy.y - 60);
+                event.preventDefault();
+                return false;
+            });
+            
+            canvas.bind('touchmove', function (event) {
+                var xy = getXY(event.originalEvent.touches[0]); 
+                ctx.lineTo(xy.x, xy.y -60);
+                ctx.stroke();
+                event.preventDefault();
+                return false;
+            }); 
+            
+            canvas.bind('touchend', function(event) {
+                ctx.closePath(); 
+                event.preventDefault();
+                return false;
+            });
+        });    
+    });
 
 
     /*PHONE STUFF*/
@@ -77,7 +117,7 @@ var Playground = function() {
         $("#addLocation").tap(function() {
             $('#newTextMessage').hide();
             
-            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 50000, enableHighAccuracy: false});
+            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 50000, enableHighAccuracy: true});
             
             function success(pos){
                 var lat = pos.coords.latitude;
@@ -92,7 +132,7 @@ var Playground = function() {
                 
             function drawMap(lat, lon) {
                 var currentDate = new Date();
-                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");           
+                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");         
             };
         });
         
