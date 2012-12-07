@@ -19,9 +19,6 @@ var Playground = function() {
         if (e.keyCode == 13) submitPost();
     });
 
-    // $("[data-role=header]").fixedtoolbar({ tapToggle: true });
-    // $("[data-role=footer]").fixedtoolbar({ tapToggle: true });
-
     function submitPost(){
         if (!($('#messageInput').val() == '')){
             var currentDate = new Date();
@@ -35,15 +32,52 @@ var Playground = function() {
         }
     };
 
+    $("#addCanvas").on('click',function(){
+        var width = $('#drawCanvas').width();
+        console.log(width);
+        var height = $('#drawCanvas').height();
+        var canvas = $('#drawCanvas'); 
+        console.log(height);
+        var ctx = document.getElementById('drawCanvas').getContext('2d');
+        ctx.fillStyle = 'rgb(255,255,255)';
+        
+        ctx.fillRect(0,0,350,350);
+        ctx.fillStyle = 'rgb(0,0,0)';
+        
+        function getXY(ev){
+            // alert(ev);
+            return {
+                x: ev.pageX,
+                y: ev.pageY
+            };
+        }
+
+        canvas.bind('touchstart', function (event) {
+            var xy = getXY(event.originalEvent.touches[0]);
+            ctx.moveTo(xy.x, xy.y - 60);
+            event.preventDefault();
+            return false;
+        });
+        
+        canvas.bind('touchmove', function (event) {
+            var xy = getXY(event.originalEvent.touches[0]);
+            ctx.lineTo(xy.x, xy.y -60);
+            ctx.stroke();
+            event.preventDefault();
+            return false;
+        });
+
+    })
+
 
     /*PHONE STUFF*/
     document.addEventListener('deviceReady', function(){
-                
-            //google maps
+        
+        //google maps
         $("#addLocation").tap(function() {
             $('#newTextMessage').hide();
             
-            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 5000, enableHighAccuracy: true});
+            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 50000, enableHighAccuracy: false});
             
             function success(pos){
                 var lat = pos.coords.latitude;
@@ -52,7 +86,7 @@ var Playground = function() {
             };
             
             function fail(error){
-                $("#map_canvas").html("<p>Code:" + error.code + "</p>");
+                alert(error.code);
             };   
             
                 
@@ -95,24 +129,24 @@ var Playground = function() {
             };
         };
         
-        $('#addVideo').tap(function() {
-            $('#newTextMessage').hide();
+        // $('#addVideo').tap(function() {
+        //     $('#newTextMessage').hide();
             
-             navigator.device.capture.captureVideo(success, fail,
-                {
-                    limit: 1     
-                }   
-             );
+        //      navigator.device.capture.captureVideo(success, fail,
+        //         {
+        //             limit: 1     
+        //         }   
+        //      );
             
-            function success(vidData){
-                alert(vidData[0].type);
-                $("#videoHolder").html("<video width='250' height='300' controls='controls'><source src='" + vidData[0].fullPath + "' type='" + vidData[0].type + "'></video>");                
-            };
+        //     function success(vidData){
+        //         alert(vidData[0].type);
+        //         $("#videoHolder").html("<video width='250' height='300' controls='controls'><source src='" + vidData[0].fullPath + "' type='" + vidData[0].type + "'></video>");                
+        //     };
             
-            function fail(msg) {
-                // alert(msg);
-            };
-        });
+        //     function fail(msg) {
+        //         // alert(msg);
+        //     };
+        // });
         
         $('#addVoice').tap(function() {
             $('#newTextMessage').hide();

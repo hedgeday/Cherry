@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="themes/cherry-theme-alt.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-    <script src="/scripts/cordova-2.1.0.ios.js"></script>
+    <script src="/scripts/cordova-2.1.0.android.js"></script>
     <script src="/scripts/util.js"></script>
     <script src="/scripts/app.js"></script>
 	<script src="/scripts/playground.js"></script>
@@ -238,7 +238,7 @@
 	<div data-role="navbar" data-iconpos="top">
 	<ul>
 		<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
-		<li><a href="#playground" data-icon="chat">Playground</a></li>
+		<li><a href="#playground" data-icon="comments-alt">Playground</a></li>
 		<!-- <li><a href="#travel" data-icon="plane">Travel</a></li> -->
 	</ul>
 	</div><!-- /navbar -->
@@ -249,8 +249,8 @@
     <div data-role="header" data-position="fixed" class="ui-bar-d">
         <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
         <h1>Playground</h1>
-<!--         <a href="#" data-icon="gear" class="ui-btn-right">Settings</a>
- -->    </div>
+
+	</div>
 	<div data-role="content">
         
         <div id="messages">
@@ -271,10 +271,10 @@
 
     	    <div data-role="navbar">
                 <ul>
-                    <li><a id="addText" href="#playground" data-icon="pencil">Text</a></li>
+                    <li><a id="addText" href="#playground" data-icon="comment">Text</a></li>
                     <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
                     <li><a id="addPicture" data-rel="dialog" href="#pictureSource" data-icon="camera">Picture</a></li>
-                    <li><a id="addVideo" href="#playground" data-icon="facetime-video">Video</a></li>
+                    <li><a id="addCanvas" href="#canvasPage" data-icon="pencil">Draw</a></li>
                     <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
                 </ul>
             </div><!-- /navbar -->           		         
@@ -290,6 +290,19 @@
         <a href="#playground" data-role="button">Cancel</a>
  	</div>
 </div>
+
+<div data-role="page" data-title="canvasPage" id="canvasPage">
+    <div data-role="header" data-position="fixed" class="ui-bar-d">
+        <a href="#playground" data-icon="arrow-left" class="ui-btn-left">Back</a>
+        <h1>Draw</h1>
+	</div>
+	<div data-role="content">
+		<div class="centerdiv">
+			<canvas id="drawCanvas" width='300px' height='300px'></canvas>
+		</div>
+	</div>
+</div>
+
 
 </body>
 </html>
