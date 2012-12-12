@@ -22,7 +22,14 @@ var TextMessage = new Schema({
     typeVoice: Boolean,
 	typeText: Boolean,
 	typeMap: Boolean,
-	typeCanvas: Boolean
+	typeCanvas: Boolean,
+	typeRegister: Boolean,
+	birthday: String,
+	gender: String,
+	startDating: String,
+	typeMood: Boolean,
+	mood: String,
+	statuses: String
 });
 
 TextMessage.plugin(passportLocalMongoose); 

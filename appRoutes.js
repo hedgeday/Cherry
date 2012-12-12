@@ -26,7 +26,7 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
         var grid = new Grid(db, 'fs');
         var buffer = new Buffer(req.body.picture);
         grid.put(buffer, {metadata:{category:'text'}, content_type: 'text'}, function(err, fileInfo) {
-            var textMsg = new TextMessage({typeCanvas: false, msg: "", photoStr: req.body.picture, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email, typeText: false, typePhoto: true, typeVoice: false,typeMap: false, photo: fileInfo._id});
+            var textMsg = new TextMessage({typeRegister: false, birthday: req.user.birthday, gender: req.user.gender, startDating: req.user.startDating, typeCanvas: false, msg: "", photoStr: req.body.picture, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email, typeText: false, typePhoto: true, typeVoice: false,typeMap: false, photo: fileInfo._id});
             console.log("username: "+req.user.username);
             console.log("user's email: "+req.user.email);
             textMsg.save(function(err){
@@ -46,9 +46,11 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
 
     });
 
+
+
     app.post('/db/saveAudio', function(req, res){
         console.log("saving the audio in the database");
-        var textMsg = new TextMessage({typeCanvas: false, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email, audio: req.body.audio, typePhoto: false, typeText: false, typeVoice: true, typeMap: false});
+        var textMsg = new TextMessage({typeResgister: false, birthday: req.user.birthday, gender: req.user.gender, startDating: req.user.startDating, typeCanvas: false, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email, audio: req.body.audio, typePhoto: false, typeText: false, typeVoice: true, typeMap: false});
         textMsg.save(function(err){
             if(err)
             {
@@ -62,7 +64,7 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
         console.log("saving the map in the database");
         // console.log("latitude: "+req.body.latitude);
         // console.log("longitude: "+req.body.longitude);
-        var textMsg = new TextMessage({typeCanvas: false, date: req.body.date, user: req.user.username, fullName: req.user.fullName, latitude: req.body.latitude, longitude: req.body.longitude, userEmail: req.user.email,  typePhoto: false, typeText: false, typeVoice: false, typeMap: true});
+        var textMsg = new TextMessage({typeResgister: false,birthday: req.user.birthday, gender: req.user.gender, startDating: req.user.startDating, typeCanvas: false, date: req.body.date, user: req.user.username, fullName: req.user.fullName, latitude: req.body.latitude, longitude: req.body.longitude, userEmail: req.user.email,  typePhoto: false, typeText: false, typeVoice: false, typeMap: true});
         textMsg.save(function(err){
             if(err)
             {
@@ -79,7 +81,7 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
     app.post('/db/post', function(req, res)
     {
         console.log("trying to save the post in the database" );
-        var textMsg = new TextMessage({typeCanvas: false, msg: req.body.message, date: req.body.date, user: req.user.username,  fullName: req.user.fullName, userEmail: req.user.email, typeText: true, typePhoto: false, typeVoice: false, typeMap: false});
+        var textMsg = new TextMessage({typeResgister: false, birthday: req.user.birthday, gender: req.user.gender, startDating: req.user.startDating, typeCanvas: false, msg: req.body.message, date: req.body.date, user: req.user.username,  fullName: req.user.fullName, userEmail: req.user.email, typeText: true, typePhoto: false, typeVoice: false, typeMap: false});
         textMsg.save(function(err) {
             if (err) {
                 console.log("didnt store the text");
@@ -117,7 +119,7 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
     {
         console.log("saving the canvas picture in the database");
         console.log("length of the string: "+req.body.canvasPicture.length)
-        var textMsg = new TextMessage({typeCanvas: true, canvasImage: req.body.canvasPicture, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email,  typePhoto: false, typeText: false, typeVoice: false, typeMap: false});
+        var textMsg = new TextMessage({typeResgister: false, birthday: req.user.birthday, gender: req.user.gender, startDating: req.user.startDating, typeCanvas: true, canvasImage: req.body.canvasPicture, date: req.body.date, user: req.user.username, fullName: req.user.fullName, userEmail: req.user.email,  typePhoto: false, typeText: false, typeVoice: false, typeMap: false});
         textMsg.save(function(err){
             if(err)
             {
@@ -128,4 +130,20 @@ var ObjectID = mongoose.mongo.BSONPure.ObjectID;
 
     });
 
+    app.post('/db/savedMood', function(req, res)
+    {
+        console.log("comes in to save the mood");
+        console.log("mood: "+req.body.mood);
+        console.log("status: "+req.body.statuses);
+        console.log("date: "+req.body.date);
+        var textMsg = new TextMessage({typeText: true, typeResgister: false, typePhoto: false, typeVoice: false, typeText: false, typeMap: false, typeCanvas: false, mood: req.body.mood, statuses: req.body.statuses, date: req.body.date, user: req.user.username, userEmail: req.user.email});
+        textMsg.save(function(err){
+            if(err)
+            {
+                console.log("didnt store the mood information");
+            }
+        });
+        return res.send('success');
+
+    });
 }
