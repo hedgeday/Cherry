@@ -16,8 +16,10 @@
 	<script src="/scripts/playground.js"></script>
     <script>
     	window.onload = function(){
-    		new login(); 
-            new App();   
+    		new login();            
+            document.addEventListener('deviceReady', function(){
+                new App();
+            }, false);     
     	}
     </script> 
 </head>
@@ -111,26 +113,25 @@
 
 			<!--POPUP PAGE FOR UPDATE-->
 			<div data-role="popup" id="popupUpdate" data-theme="a" class="ui-corner-all">
-				<form>
-					<div style="padding:10px 20px;">
-				  	<h3>Update Profile</h3>
-
-		          	<label for="mood" class="select"></label>
-	   				<select name="mood" data-icon="heart-empty" id="moodField">
-						<option selected value="">Mood</option>
-						<option value="Happy">Happy</option>
-						<option value="Sad">Sad</option>
-						<option value="Angry">Angry</option>
-						<option value="Feisty">Feisty</option>
-						<option value="Indifferent">Indifferent</option>
-				  	</label>
-
-		          	<label for="status" class="ui-hidden-accessible">Status:</label>
-		          	<input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
-
-		    	  	<a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Submit</a>
-					</div>
-				</form>
+				<div style="padding:10px 20px;">
+                <h3>Update Profile</h3>
+                <a id="changeProfile" href="#homescreen" data-role="button" data-icon="camera" data-iconpos="right">Change Profile Picture</a>
+                    <form>
+    		          	<label for="mood" class="select"></label>
+    	   				<select name="mood" data-icon="heart-empty" id="moodField">
+    						<option selected value="">Mood</option>
+    						<option value="Happy">Happy</option>
+    						<option value="Sad">Sad</option>
+    						<option value="Angry">Angry</option>
+    						<option value="Feisty">Feisty</option>
+    						<option value="Indifferent">Indifferent</option>
+                        </select>
+    		          	<label for="status" class="ui-hidden-accessible">Status:</label>
+    		          	<input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
+    
+    		    	  	<a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Submit</a>
+    				</form>
+                </div>
 			</div>
 			<!-- END OF POPUP PAGE -->
 
@@ -139,7 +140,7 @@
 
 				<div class="ui-block-a center"><strong id="myName">Person A</strong></br>				
 					<div class="imageWrapper">
-						<img class="profilePic" src="../images/profilePicM.jpg"></img>
+						<img id="profilePic" class="profilePic" src="../images/profilePicM.jpg" />
 					</div>
 					<div class="ui-grid-a center">
 						<div class="ui-block-a left">
@@ -160,7 +161,7 @@
 
 				<div class="ui-block-b center"><strong>Person B</strong></br>
 					<div class="imageWrapper center">
-						<img class="profilePic" src="../images/profilePicF.png"></img>
+						<img class="profilePic" src="../images/profilePicF.png" />
 					</div>
 					<div class="ui-grid-a center">
 						<div class="ui-block-a left">
@@ -279,7 +280,7 @@
 	        <p>Choose the source for the photo</p>
 	        <a id="librarySource" href="#playground" data-role="button" data-theme="b">Library</a>
 	        <a id="cameraSource" href="#playground" data-role="button" data-theme="b">Camera</a>
-	        <a href="#playground" data-role="button">Cancel</a>
+	        <a href="#" data-rel="back" data-role="button">Cancel</a>
 	 	</div>
 	</div>
 	<!--End of Dialog Page-->

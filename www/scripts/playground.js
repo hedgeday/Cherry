@@ -98,13 +98,5 @@ var Playground = function() {
                 return false;
             });
         });    
-    });
-
-
-    /*PHONE STUFF*/
-    document.addEventListener('deviceReady', function(){
-        
-        
-    }, false);//event listener           
-    
+    });      
 };

@@ -6,7 +6,7 @@ var App = function(){
     console.log("enters client side")
     this.usersDiv = $('#usersList');
     
-    $('#addText').click(function() {
+    $('#addText').tap(function() {
         $('#newTextMessage').show();
         $('#newTextMessage input').focus();
     });
@@ -17,11 +17,12 @@ var App = function(){
 App.prototype.registerEvents = function(){
     this.registerRegister();
     this.registerLogin();
-    $('#cameraSource').click(this.pictureCamera.bind(this));
-    $('#librarySource').click(this.pictureLibrary.bind(this));
-    $("#addVoice").click(this.audioCapture.bind(this));
-    $("#addLocation").click(this.locationMap.bind(this));
+    $('#cameraSource').tap(this.pictureCamera.bind(this));
+    $('#librarySource').tap(this.pictureLibrary.bind(this));
+    $("#addVoice").tap(this.audioCapture.bind(this));
+    $("#addLocation").tap(this.locationMap.bind(this));
     $('#submitCanvas').tap(this.canvasPicture.bind(this));
+    $('#changeProfile').tap(this.profilePicture.bind(this));
     
 
 }
@@ -109,6 +110,37 @@ App.prototype.canvasPicture = function()
     
 
 }
+
+App.prototype.profilePicture = function()
+{
+    var picture = "";
+    navigator.camera.getPicture(function(pic)
+    {
+        this.ajaxFormJSON(  
+        {
+            picture: pic
+        },
+        //CHANGE THIS ROUTE!!!!
+        '/db/savePic',
+        function success(data){
+            $("#profilePic").attr('src', "data:image/jpeg;base64,"+data.toString());
+        },
+        function error(xhr, status, err){
+            alert(JSON.stringify(err));
+        });
+    
+    }.bind(this), function(msg)
+    {
+        alert(msg);
+    
+    },
+    {
+        quality: 20,
+        destinationType: navigator.camera.DestinationType.DATA_URL,
+        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    );
+};
 
 App.prototype.pictureCamera = function()
 {   
