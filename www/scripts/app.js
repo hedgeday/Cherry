@@ -15,14 +15,14 @@ login.prototype.setup = function(){
                     new Playground();
                 });
 	
-	$('#createAccButton').on('tap', function(){
-		if (validateInfoForm())$.mobile.changePage("#homescreen");
-		loadProfPage();
-	});
+	// $('#createAccButton').on('tap', function(){
+	// 	// if (validateInfoForm())$.mobile.changePage("#homescreen");
+	// 	// loadProfPage();
+	// });
 	
 	function loadProfPage(){
 		$('#myName').text($('#nInput').val());
-		// $('#myBD').text($('#birthdayInput').val());
+		$('#myBD').text($('#birthdayInput').val());
 	}
 
 	$('.notificationsBox').swiperight(function(){
@@ -35,26 +35,26 @@ login.prototype.setup = function(){
 		}
 	});
 
-	/* Update Mood/Status */
-	$('#submitUpdate').on('tap', function(){
-		updateProfPage();
-	});
+	// /* Update Mood/Status */
+	// $('#submitUpdate').on('tap', function(){
+	// 	updateProfPage();
+	// });
 
-	$('#statusField').bind('keypress', function(e) {if (e.keyCode == 13) {
-		e.preventDefault();
-		if (!($('#statusField').val() == ''))
-			updateProfPage();
-	}});
+	// $('#statusField').bind('keypress', function(e) {if (e.keyCode == 13) {
+	// 	e.preventDefault();
+	// 	if (!($('#statusField').val() == ''))
+	// 		updateProfPage();
+	// }});
 
-	function updateProfPage(){
-		if (!$('#moodField').val() == '')
-			$('#myMood').text($('#moodField').val());
-		else
-			$('#myMood').text('Not set');
-		if (!$('#statusField').val() == '')
-			$('#myStatus').text($('#statusField').val());
-		$('#popupUpdate').popup("close")
-	}
+	// function updateProfPage(){
+	// 	if (!$('#moodField').val() == '')
+	// 		$('#myMood').text($('#moodField').val());
+	// 	else
+	// 		$('#myMood').text('Not set');
+	// 	if (!$('#statusField').val() == '')
+	// 		$('#myStatus').text($('#statusField').val());
+	// 	$('#popupUpdate').popup("close")
+	// }
 	/* End of section*/
 
 	function validateInfoForm(){

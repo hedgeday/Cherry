@@ -22,9 +22,46 @@ App.prototype.registerEvents = function(){
     $("#addVoice").click(this.audioCapture.bind(this));
     $("#addLocation").click(this.locationMap.bind(this));
     $('#submitCanvas').tap(this.canvasPicture.bind(this));
-    
+    $('#submitUpdate').tap(this.updateMood.bind(this));
 
 }
+
+App.prototype.updateMood = function()
+{
+    var mood = '';
+    var status = '';
+    if (!$('#moodField').val() == '')
+    {
+        mood = $('#moodField').val();
+        $('#myMood').text($('#moodField').val());
+    }
+    else
+        $('#myMood').text('Not set');
+    if (!$('#statusField').val() == '')
+    {
+        status = $('#statusField').val();
+        $('#myStatus').text($('#statusField').val());
+    }
+    else{
+        $('#myStatus').text('Not set');
+    }
+    $('#popupUpdate').popup("close")
+
+    this.ajaxFormJSON(  
+    {
+        mood: mood,
+        statuses: status,
+        date: new Date()
+    },
+    '/db/savedMood',
+    function success(data){
+        console.log("saved the message");
+    },
+    function error(xhr, status, err){
+        alert(JSON.stringify(err));
+    });
+
+}   
 
 App.prototype.post = function()
 {
@@ -245,7 +282,8 @@ App.prototype.registerRegister = function(){
                     fullName: fullName,
                     birthday: birthday,
                     startDating: startDating,
-                    gender: gender
+                    gender: gender,
+                    date: new Date()
                 },
                 '/register',
                 function success(data){
@@ -391,13 +429,27 @@ App.prototype.registerLogin = function(){
                 '/login',
                 function success(data){
                     console.log("data: "+data);
-                    
+                    current = 0;
+                    partner = 0;
                     // window.location = '/';
                     for(var i = 0; i < data.length; i++)
                     {
                         console.log("user: "+data[i].user + " message: "+data[i].msg);
                         if(data[i].user === username){
-                            if(data[i].typeText == true)
+                            if(data[i].typeRegister == true)
+                            {
+                                $('#myName').text(data[i].user);
+                                $('#startDating').text(data[i].startDating);
+                                $('#timeSpent').text('crap');
+                            }
+                            else if(data[i].typeMood == true)
+                            {
+                                var mood = data[i].mood;
+                                var status = data[i].statuses;
+                                $('#myMood').text(mood);
+                                $('#myStatus').text(status);
+                            }
+                            else if(data[i].typeText == true)
                             {
                                 var myMsg = $("<div class='myMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatPic'><img class='profilePicSmall' src='/images/profilePicF.png' /></div><div class='ui-block-b right chatText'>" + data[i].msg + "</div></div><p class='center time'>Posted on "+data[i].date+"</p></div>");      
                                 $('#messages').append(myMsg.hide().fadeIn(500));
@@ -430,7 +482,18 @@ App.prototype.registerLogin = function(){
                         //DO IT FOR THE OTHER PERSON
                         else
                         {
-                            if(data[i].typeText == true)
+                            if(data[i].typeRegister == true)
+                            {
+                                $('#otherName').text(data[i].user);
+                            }
+                            else if(data[i].typeMood == true)
+                            {
+                                var mood = data[i].mood;
+                                var status = data[i].statuses;
+                                $('#myMood').text(mood);
+                                $('#myStatus').text(status);
+                            }
+                            else if(data[i].typeText == true)
                             {
                                 var otherMsg = $("<div class='otherMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatText'>"+ data[i].msg + "</div><div class='ui-block-b right chatPic'><img class='profilePicSmall' src='/images/profilePicM.jpg' /></div></div><p class='center time'>Posted on "+data[i].date+"</p></div>");      
                                 $('#messages').append(otherMsg.hide().fadeIn(500));

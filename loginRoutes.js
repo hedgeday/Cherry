@@ -33,6 +33,8 @@ module.exports = function (app) {
             }
 
             var user = new User({ username : req.body.username, email: req.body.email, othersEmail: req.body.othersEmail, fullName: req.body.fullName, birthday: req.body.birthday, startDating: req.body.startDating, gender: req.body.gender});
+            var textMsg = new TextMessage({typeRegister: true, birthday: req.body.birthday, gender: req.body.gender, startDating: req.body.startDating, typeCanvas: false, date: req.body.date, user: req.body.username, fullName: req.body.fullName, userEmail: req.body.email, typeText: false, typePhoto: false, typeVoice: false,typeMap: false});
+
             console.log("creates a new one");
             user.registeredTimestamp = new Date();
             user.timeLineObjects = [];
@@ -45,6 +47,12 @@ module.exports = function (app) {
                     if (err) {
                         return res.send({'err': err});
                     }
+                    textMsg.save(function(err){
+                        if(err)
+                        {
+                            console.log("didnt store the picture information");
+                        }
+                    });
                     return res.send('success');
                 });
             });  
@@ -67,7 +75,7 @@ module.exports = function (app) {
         console.log("User's email: "+req.user.email);
         console.log("Other's email: "+req.user.othersEmail);
 
-        TextMessage.find({$or : [{userEmail: req.user.email}, {userEmail: req.user.othersEmail}]}, 'user msg date photo typePhoto typeText typeVoice audio photoStr typeMap latitude longitude typeCanvas canvasImage',
+        TextMessage.find({$or : [{userEmail: req.user.email}, {userEmail: req.user.othersEmail}]}, 'user msg date photo typePhoto typeText typeVoice audio photoStr typeMap latitude longitude typeCanvas canvasImage typeRegister birthday gender startDating typeMood mood statuses',
             {
                 sort: [['date', 1]]
             },

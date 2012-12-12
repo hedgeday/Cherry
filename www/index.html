@@ -11,307 +11,318 @@
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <script src="/scripts/cordova-2.1.0.ios.js"></script>
-    <script src="/scripts/app.js"></script>
-    <script src="/scripts/clientSide.js"></script>
-	<script src="/scripts/playground.js"></script>
+    <script src="/scripts/util.js"></script>
+ <!-- //    <script src="/scripts/app.js"></script> -->
+	<!-- // <script src="/scripts/playground.js"></script> -->
+	<script src='/scripts/app.js'></script>
+	<!-- // <script src='/scripts/unregistered.js'></script> -->
+	<script src='/scripts/clientSide.js'></script>
+	<script src='/scripts/playground.js'></script>
     <script>
     	window.onload = function(){
-    		new login(); 
-            new App();   
+            window.util = new Util();
+            window.util.patchFnBind();
+    		new login();    
+    		new App();
     	}
     </script> 
-</head>
+<style>
 
+.ui-page {
+	/*background: url(images/gray_jean.png);
+    background-repeat:repeat;
+    background-position:center center;
+    background-attachment:scroll;*/
+}
+
+</style>
+</head> 
 <body> 
 
-	<!--Splash Screen--> 
-	<div data-role="page" id="splash"> 
-	    <div data-role="content" class='splashImage topMargin'>  
-	        <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
-	    </div>
-	</div>
-	<!--End of Splash Screen--> 
+<div data-role="page" id="splash"> 
+    <div data-role="content" class='splashImage topMargin'>  
+        <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
+    </div>
+</div>
 
-	<!--Sign In Page (Home)--> 
-	<div data-role="page" data-title="Home" id="home" class='homeBG'>
-		<div data-role="content">
-			<div class='splashImage'>
-				 <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
-			</div>
-			<form id='registerForm'>
-				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="username" class="select"></label>			
-					<input type="text" name="usernameInput" id="usernameInput" value="" placeholder="Username"/>
-				</div>
-				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="password" class="select"></label>			
-					<input type="password" name="passwordInput" id="passwordInput" value="" placeholder="Password"/>
-				</div>
-			</form>
-			<a href="#" id="submitSignIn" data-role="button" data-icon="arrow-right" data-iconpos="right">Sign In</a>
-			<p class='center'>Don't have an account? <a id="signUpButton">Sign up!</a></p>
-	 	</div>
-	</div>
-	<!--End of Sign In Page (Home)--> 
-
-	<!--Sign Up Form Screen--> 
-	<div data-role="page" data-title="Sign Up" id="signup">
-		<div data-role="header" class="ui-bar-d" >
-			<a data-rel="back" data-icon="arrow-l" class="ui-btn-left">Back</a>
-			<h4>Sign Up</h4>
+<div data-role="page" data-title="Home" id="home" class='homeBG'>
+	<div data-role="content">
+		<div class='splashImage'>
+			 <img id='welcomeLogo' src="./images/Cherry_logo1.gif" />
 		</div>
-		<div data-role="content">
-			<p>Please enter the following information:</p>
-			<form>
+		<form id='registerForm'>
 			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="username" class="select"></label>			
-				<input type="text" name="unInput" id="unInput" value="" placeholder="Username"/>
+			<label for="username" class="select"></label>			
+			<input type="text" name="usernameInput" id="usernameInput" value="" placeholder="Username"/>
 			</div>
 			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="password" class="select"></label>			
-				<input type="password" name="passwordInput" id="pwInput" value="" placeholder="Password (8 Characters Minimum)"/>
+			<label for="password" class="select"></label>			
+			<input type="password" name="passwordInput" id="passwordInput" value="" placeholder="Password"/>
 			</div>
-			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="name" class="select"></label>			
-				<input type="text" name="nameInput" id="nInput" value="" placeholder="Your Full Name"/>
-			</div>
-			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="email" class="select"></label>			
-				<input type="email" name="emailInput" id="emailInput" value="" placeholder="Your Email"/>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="bd" class="select">Your birthday:</label>			
-				<input type="date" name="bdInput" id="birthdayInput" value="" placeholder=""/>
-			</div>
-			<div data-role="fieldcontain" class="ui-hide-label">
-	            <label for="gender" class="select"></label>
-				<select name="gender" data-icon="arrow-down" id="genderInput">
-					<option selected value="">Gender</option>
-					<option value="Male">Male</option>
-					<option value="Female">Female</option>
-				</select>
-			</div>
-			<div data-role="fieldcontain" class="ui-hide-label">
-				<label for="sigOtherEmail" class="select"></label>			
-				<input type="email" name="otherEmailInput" id="otherEmailInput" value="" placeholder="Your Significant other's Email"/>
-			</div>
-			<div data-role="fieldcontain">
-				<label for="startDate" class="select">When did you start dating?</label>			
-				<input type="date" name="startDateInput" id="startDateInput" value="" placeholder=""/>
-			</div>
-			</form>
-			<a id="createAccButton" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Account</a>
-		</div>
+		</form>
+		<a href="#" id="submitSignIn" data-role="button" data-icon="arrow-right" data-iconpos="right">Sign In</a>
+		<p class='center'>Don't have an account? <a id="signUpButton">Sign up!</a></p>
+ 	</div>
+</div>
+
+<div data-role="page" data-title="Sign Up" id="signup">
+	<div data-role="header" class="ui-bar-d" >
+		<a data-rel="back" data-icon="arrow-l" class="ui-btn-left">Back</a>
+		<h4>Sign Up</h4>
 	</div>
-	<!--End of Sign Up Form Screen--> 
+	<div data-role="content">
+		<p>Please enter the following information:</p>
+		<form>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="username" class="select"></label>			
+			<input type="text" name="unInput" id="unInput" value="" placeholder="Username"/>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="password" class="select"></label>			
+			<input type="password" name="passwordInput" id="pwInput" value="" placeholder="Password (8 Characters Minimum)"/>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="name" class="select"></label>			
+			<input type="text" name="nameInput" id="nInput" value="" placeholder="Your Full Name"/>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="email" class="select"></label>			
+			<input type="email" name="emailInput" id="emailInput" value="" placeholder="Your Email"/>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="bd" class="select">Your birthday:</label>			
+			<input type="date" name="bdInput" id="birthdayInput" value="" placeholder=""/>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+            <label for="gender" class="select"></label>
+			<select name="gender" data-icon="arrow-down" id="genderInput">
+			<option selected value="">Gender</option>
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain" class="ui-hide-label">
+			<label for="sigOtherEmail" class="select"></label>			
+			<input type="email" name="otherEmailInput" id="otherEmailInput" value="" placeholder="Your Significant other's Email"/>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="startDate" class="select">When did you start dating?</label>			
+			<input type="date" name="startDateInput" id="startDateInput" value="" placeholder=""/>
+		</div>
+		</form>
+		<a id="createAccButton" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Account</a>
+	</div>
+</div>
 
-	<!--Homescreen (PROFILE PAGE)--> 
-	<div data-role="page" data-title="Homescreen" id="homescreen">
-		<div data-role="content">
-
-			<!--POPUP PAGE FOR UPDATE-->
+<div data-role="page" data-title="Sign up" id="homescreen">
+	<!-- <div data-role="header" class="ui-bar-d"><h3 class="headerText">Profile</h3></div> -->
+	<div data-role="content">
+		
+		<div class="ui-grid-a block redBG">
+		
+		<div class="ui-block-a center"><strong id="myName">Person A</strong></br>
+						
 			<div data-role="popup" id="popupUpdate" data-theme="a" class="ui-corner-all">
-				<form>
-					<div style="padding:10px 20px;">
-				  	<h3>Update Profile</h3>
+			<form>
+				<div style="padding:10px 20px;">
+				  <h3>Update Profile</h3>
 
-		          	<label for="mood" class="select"></label>
+		          <label for="mood" class="select"></label>
 	   				<select name="mood" data-icon="heart-empty" id="moodField">
-						<option selected value="">Mood</option>
-						<option value="Happy">Happy</option>
-						<option value="Sad">Sad</option>
-						<option value="Angry">Angry</option>
-						<option value="Feisty">Feisty</option>
-						<option value="Indifferent">Indifferent</option>
-				  	</label>
+					<option selected value="">Mood</option>
+					<option value="Happy">Happy</option>
+					<option value="Sad">Sad</option>
+					<option value="Angry">Angry</option>
+					<option value="Feisty">Feisty</option>
+					<option value="Indifferent">Indifferent</option>
+				  </label>
 
-		          	<label for="status" class="ui-hidden-accessible">Status:</label>
-		          	<input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
+		          <label for="status" class="ui-hidden-accessible">Status:</label>
+		          <input type="text" name="status" id="statusField" value="" placeholder="Status" data-theme="a" />
 
-		    	  	<a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Submit</a>
-					</div>
-				</form>
+		    	  <a href="#homescreen" data-role="button" data-theme="b" id='submitUpdate'>Submit</a>
+				</div>
+			</form>
 			</div>
-			<!-- END OF POPUP PAGE -->
 
-			<!--FIRST CARD (DUAL PROFILES)-->
-			<div class="ui-grid-a block redBG">
-
-				<div class="ui-block-a center"><strong id="myName">Person A</strong></br>				
-					<div class="imageWrapper">
-						<img class="profilePic" src="../images/profilePicM.jpg"></img>
-					</div>
-					<div class="ui-grid-a center">
-						<div class="ui-block-a left">
-							<p class="bold">Mood:</p>
-						</div>
-						<div class="ui-block-b left">
-							<p id="myMood">Not set</p>
-						</div>
-						<div class="ui-block-a left">
-							<p class="bold">Status:</p>
-						</div>
-						<div class="ui-block-b left">
-							<p id="myStatus">Not set</p>
-						</div>
-					</div> 
-					<a href="#popupUpdate" data-role="button" class="transparent" data-rel="popup">Update</a>
-				</div>
-
-				<div class="ui-block-b center"><strong>Person B</strong></br>
-					<div class="imageWrapper center">
-						<img class="profilePic" src="../images/profilePicF.png"></img>
-					</div>
-					<div class="ui-grid-a center">
-						<div class="ui-block-a left">
-							<p class="bold">Mood:</p>
-						</div>
-						<div class="ui-block-b left">
-							<p>Not set</p>
-						</div>
-						<div class="ui-block-a left">
-							<p class="bold">Status:</p>
-						</div>
-						<div class="ui-block-b left">
-							<p>Not set</p>
-						</div>
-					</div>
-					<a href="" data-role="button" class="invisible"></a> 
-				</div>
+			<div class="imageWrapper">
+				<img class="profilePic" src="../images/profilePicM.jpg"></img>
 			</div>
-			<!--END OF FIRST CARD (DUAL PROFILES)-->
 
-			<!--SECOND CARD (NOTIFICATIONS)-->
-			<div class="block notificationsBox redBG">
-				<div class="center">
-					<strong>Couple Notifications</strong>
+			<div class="ui-grid-a center">
+			
+				<div class="ui-block-a left">
+				<p class="bold">Mood:</p>
 				</div>
-				<div class="ui-grid-a center notificationContent">	
-					<div class="ui-block-a left">
-						<p class="bold">Upcoming event:</p>
-					</div>
-					<div class="ui-block-b right">
-						<p>One year Anniversary</p>
-					</div>
-				</div>
-			</div>
-			<!-- END OF SECOND CARD-->
 
-			<!--THIRD CARD-->
-			<div class="block redBG">
-				<div class="center">
-					<strong>Couple Statistics</strong>
+				<div class="ui-block-b left">
+				<p id="myMood">Not set</p>
 				</div>
-				<div class="ui-grid-a">
-					<div class="ui-block-a left">
-						<p class="bold">Started dating:</p>
-					</div>
-					<div class="ui-block-b right">
-						<p>ab/cd/efgh</p>
-					</div>
-					<div class="ui-block-a left">
-						<p class="bold">Time spent together:</p> 
-					</div>
-					<div class="ui-block-b right">	
-						<p>40 weeks</p>
-					</div>
-					<div class="ui-block-a left">
-						<p class="bold">Number of break-ups:</p> 
-					</div>
-					<div class="ui-block-b right">	
-						<p>3</p>
-					</div>
-				</div>
-			</div>
-			<!--END OF THIRD CARD-->
-	 	</div>
 
-		<div data-role="footer" data-position="fixed" class="ui-bar-d">
-			<div data-role="navbar" data-iconpos="top">
-				<ul>
-					<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
-					<li><a href="#playground" data-icon="comments-alt">Playground</a></li>
-				</ul>
-			</div>
+				<div class="ui-block-a left">
+				<p class="bold">Status:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p id="myStatus">Not set</p>
+				</div>
+			</div> 
+			<a href="#popupUpdate" data-role="button" class="transparent" data-rel="popup">Update</a>
 		</div>
+
+		<div class="ui-block-b center"><strong id = "otherName">Person B</strong></br>
+			<div class="imageWrapper center">
+				<img class="profilePic" src="../images/profilePicF.png"></img>
+			</div>
+			<div class="ui-grid-a center">
+			
+				<div class="ui-block-a left">
+				<p class="bold">Mood:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>Not set</p>
+				</div>
+
+
+				<div class="ui-block-a left">
+				<p class="bold">Status:</p>
+				</div>
+				<div class="ui-block-b left">
+				<p>Not set</p>
+				</div>
+			</div>
+			<a href="" data-role="button" class="invisible"></a> 
+		</div>
+
+		</div><!-- Two Column Grid -->
+
+		<div class="block notificationsBox redBG">
+		<div class="center">
+			<strong>Couple Notifications</strong>
+		</div>
+		
+
+		<div class="ui-grid-a center notificationContent">
+			
+			<div class="ui-block-a left">
+			<p class="bold">Upcoming event:</p>
+			</div>
+			<div class="ui-block-b right">
+			<p>One year Anniversary</p>
+			</div>
+		</div><!-- One Column Grid -->
+		</div>
+
+		<div class="block redBG">
+			<div class="center">
+			<strong>Couple Statistics</strong>
+			</div>
+		<div class="ui-grid-a">
+			<div class="ui-block-a left">
+				<p class="bold">Started dating:</p>
+			</div>
+			<div class="ui-block-b right" id = "startDating">
+				<p>ab/cd/efgh</p>
+			</div>
+			<div class="ui-block-a left">
+			<p class="bold">Time spent together:</p> 
+			</div>
+			<div class="ui-block-b right" id="timeSpent">	
+			<p>40 weeks</p>
+			</div>
+			<div class="ui-block-a left">
+			<p class="bold">Number of break-ups:</p> 
+			</div>
+			<div class="ui-block-b right">	
+			<p>3</p>
+			</div>
+		</div><!-- One Column Grid -->
+		</div>
+ 	</div>
+
+	<div data-role="footer" data-position="fixed" class="ui-bar-d">
+	<div data-role="navbar" data-iconpos="top">
+	<ul>
+		<li><a href="#profile" class="ui-btn-active ui-state-persist" data-theme="d" data-icon="person" >Profile</a></li>
+		<li><a href="#playground" data-icon="comments-alt">Playground</a></li>
+		<!-- <li><a href="#travel" data-icon="plane">Travel</a></li> -->
+	</ul>
+	</div><!-- /navbar -->
 	</div>
-	<!--End of Homescreen (PROFILE PAGE)--> 
+</div>
 
-	<!-- PLAYGROUND -->
-	<div data-role="page" data-title="playground" id="playground">
-	    <div data-role="header" data-position="fixed" class="ui-bar-d">
-	        <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
-	        <h1>Playground</h1>
-		</div>
-		<div data-role="content">
-	        <div id="messages">
-	        	<!--Playground Content goes here-->
-	        </div>        
-	 	</div>
-	    <div data-role="footer" data-position="fixed" class="ui-bar-d"> 
-	        <div id="newTextMessage" data-transition="slidedown" style='display: none;'>
-	            <input id="messageInput" type='text'>
-	            <div class="ui-grid-a">
+<div data-role="page" data-title="playground" id="playground">
+    <div data-role="header" data-position="fixed" class="ui-bar-d">
+        <a href="#homescreen" data-icon="arrow-left" class="ui-btn-left">Home</a>
+        <h1>Playground</h1>
+
+	</div>
+	<div data-role="content">
+        
+        <div id="messages">
+        </div>    
+
+        <div data-role="footer" data-position="fixed" class="ui-bar-d"> 
+            <div id="newTextMessage" data-transition="slidedown" style='display: none;'>
+                <input id="messageInput" type='text'>
+                <div class="ui-grid-a">
 					<div class="ui-block-a">
-	                	<a id="newTextMessagePost" href="#" data-role="button">Post</a>
-	                </div>
-	                <div class="ui-block-b">
-	                	<a class="cancelPost" href="#" data-role="button">Cancel</a>
-	        		</div>
-	        	</div>
-	        </div>
-		    <div data-role="navbar">
-	            <ul>
-	                <li><a id="addText" href="#playground" data-icon="comment">Text</a></li>
-	                <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
-	                <li><a id="addPicture" data-rel="dialog" href="#pictureSource" data-icon="camera">Picture</a></li>
-	                <li><a id="addCanvas" href="#canvasPage" data-icon="pencil">Sketch</a></li>
-	                <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
-	            </ul>
-	        </div><!-- /navbar -->           		         
-	    </div>
-	</div> 
-	<!--END OF PLAYGROUND-->
+                    <a id="newTextMessagePost" href="#" data-role="button">Post</a>
+                    </div>
+                    <div class="ui-block-b">
+                    <a class="cancelPost" href="#" data-role="button">Cancel</a>
+            		</div>
+            	</div>
+            </div> <!-- /formDiv -->
 
-	<!--DIALOG PAGE FOR PICTURES (Library / Camera)-->
-	<div data-role="page" data-title="pictureSource" id="pictureSource">
-		<div data-role="content">
-	        <p>Choose the source for the photo</p>
-	        <a id="librarySource" href="#playground" data-role="button" data-theme="b">Library</a>
-	        <a id="cameraSource" href="#playground" data-role="button" data-theme="b">Camera</a>
-	        <a href="#playground" data-role="button">Cancel</a>
-	 	</div>
+    	    <div data-role="navbar">
+                <ul>
+                    <li><a id="addText" href="#playground" data-icon="comment">Text</a></li>
+                    <li><a id="addVoice" href="#playground" data-icon="volume-up">Voice</a></li>
+                    <li><a id="addPicture" data-rel="dialog" href="#pictureSource" data-icon="camera">Picture</a></li>
+                    <li><a id="addCanvas" href="#canvasPage" data-icon="pencil">Draw</a></li>
+                    <li><a id="addLocation" href="#playground" data-icon="map-marker">Location</a></li>
+                </ul>
+            </div><!-- /navbar -->           		         
+        </div>
+ 	</div>
+</div> 
+
+<div data-role="page" data-title="pictureSource" id="pictureSource">
+	<div data-role="content">
+        <p>Choose the source for the photo</p>
+        <a id="librarySource" href="#playground" data-role="button" data-theme="b">Library</a>
+        <a id="cameraSource" href="#playground" data-role="button" data-theme="b">Camera</a>
+        <a href="#playground" data-role="button">Cancel</a>
+ 	</div>
+</div>
+
+<div data-role="page" data-title="canvasPage" id="canvasPage">
+    <div data-role="header" data-position="fixed" class="ui-bar-d">
+        <a href="#playground" data-icon="remove" class="ui-btn-left">Cancel</a>
+        <a href="#playground" id="submitCanvas" data-icon="ok" class="ui-btn-right">Submit</a>
+        <h1>Draw</h1>
 	</div>
-	<!--End of Dialog Page-->
-
-	<!--Page for Canvas drawing-->
-	<div data-role="page" data-title="canvasPage" id="canvasPage">
-	    <div data-role="header" data-position="fixed" class="ui-bar-d">
-	        <a href="#playground" data-icon="remove" class="ui-btn-left">Cancel</a>
-	        <a href="#playground" id="submitCanvas" data-icon="ok" class="ui-btn-right">Submit</a>
-	        <h1>Draw</h1>
-		</div>
-		<div data-role="content">
-			<div class="centerdiv">
-				<canvas id="drawCanvas" width='300px' height='300px'></canvas>
-	            <form>
-	                <fieldset id="colorPicker" data-type="horizontal" data-role="controlgroup">
-	                    <input class="btn-active" type="radio" name="radio-choice" id="radio-choice-1" value="black" checked="checked" />
-	                    <label for="radio-choice-1">Black</label>
-	                    <input type="radio" name="radio-choice" id="radio-choice-2" value="blue"  />
-	                    <label for="radio-choice-2">Blue</label>
-	                    <input type="radio" name="radio-choice" id="radio-choice-3" value="red"  />
-	                    <label for="radio-choice-3">Red</label>
-	                    <input type="radio" name="radio-choice" id="radio-choice-4" value="green"  />
-	                    <label for="radio-choice-4">Green</label>
-	                    <input type="radio" name="radio-choice" id="radio-choice-5" value="yellow"  />
-	                    <label for="radio-choice-5">Yellow</label>
-	                </fieldset>
-	            </form>
-			</div>
+	<div data-role="content">
+		<div class="centerdiv">
+			<canvas id="drawCanvas" width='300px' height='300px'></canvas>
+            <form>
+                <fieldset id="colorPicker" data-type="horizontal" data-role="controlgroup">
+                    <input class="btn-active" type="radio" name="radio-choice" id="radio-choice-1" value="black" checked="checked" />
+                    <label for="radio-choice-1">Black</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-2" value="blue"  />
+                    <label for="radio-choice-2">Blue</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-3" value="red"  />
+                    <label for="radio-choice-3">Red</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-4" value="green"  />
+                    <label for="radio-choice-4">Green</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-5" value="yellow"  />
+                    <label for="radio-choice-5">Yellow</label>
+                </fieldset>
+            </form>
 		</div>
 	</div>
-	<!--End of Page for Canvas Drawing-->
+</div>
+
 
 </body>
 </html>
