@@ -8,13 +8,21 @@ console.log("comes to text.js");
 
 var TextMessage = new Schema({
     msg: String,
-    photo: String,
-    audio: String,
     date: Date,
     user: String,
+    fullName: String,
+    userEmail: String,
+    photo: Schema.Types.ObjectId, 
+    canvasImage: String,
+    latitude: String,
+    longitude: String,
+    audio: String,
+    photoStr : String,
     typePhoto: Boolean,
     typeVoice: Boolean,
-    typeText: Boolean
+	typeText: Boolean,
+	typeMap: Boolean,
+	typeCanvas: Boolean
 });
 
 TextMessage.plugin(passportLocalMongoose); 

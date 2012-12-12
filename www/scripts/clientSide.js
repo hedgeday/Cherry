@@ -222,52 +222,49 @@ App.prototype.pictureLibrary = function()
 
 App.prototype.registerRegister = function(){
     $('#createAccButton').click(function(){
-        if (validateInfoForm())
-        {
-            var username = $('#unInput').val();
-            var password = $('#pwInput').val();
-            var email = $('#emailInput').val();
-            var othersEmail = $('#otherEmailInput').val();
-            var fullName = $('#nInput').val();
-            var birthday = $('#birthdayInput').val();
-            var startDating = $('#startDateInput').val();
-            var gender = $('#genderInput').val(); 
+        var username = $('#unInput').val();
+        var password = $('#pwInput').val();
+        var email = $('#emailInput').val();
+        var othersEmail = $('#otherEmailInput').val();
+        var fullName = $('#nInput').val();
+        var birthday = $('#birthdayInput').val();
+        var startDating = $('#startDateInput').val();
+        var gender = $('#genderInput').val(); 
 
-            console.log("comes to register");
-            console.log("username: "+username);
-            console.log("password: "+password);
+        console.log("comes to register");
+        console.log("username: "+username);
+        console.log("password: "+password);
 
-            
-            this.ajaxFormJSON(  
+        
+        this.ajaxFormJSON(  
+                {
+                    username: username,
+                    password: password,
+                    email: email,
+                    othersEmail: othersEmail,
+                    fullName: fullName,
+                    birthday: birthday,
+                    startDating: startDating,
+                    gender: gender
+                },
+                '/register',
+                function success(data){
+                    // alert(JSON.stringify(data));
+                    if(data == 'user exists')
                     {
-                        username: username,
-                        password: password,
-                        email: email,
-                        othersEmail: othersEmail,
-                        fullName: fullName,
-                        birthday: birthday,
-                        startDating: startDating,
-                        gender: gender
-                    },
-                    '/register',
-                    function success(data){
-                        // alert(JSON.stringify(data));
-                        if(data == 'user exists')
-                        {
-                            alert("user exists");
-                          $.mobile.changePage($("#signup"));
-                        }
-                        else
-                        { 
-                            $.mobile.changePage($("#home"));
+                        alert("user exists");
+                      $.mobile.changePage($("#signup"));
+                    }
+                    else
+                    { 
+                    alert("swag");
+                      $.mobile.changePage($("#home"));
+                    }
 
-                        }
-
-                    },
-                    function error(xhr, status, err){
-                        alert(JSON.stringify(err));
-            });
-        }
+                },
+                function error(xhr, status, err){
+                    alert(JSON.stringify(err));
+                });
     }.bind(this));
 }
 

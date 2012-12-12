@@ -24,8 +24,8 @@ function init(){
     require('./loginRoutes')(app);
     require('./appRoutes')(app);
    
-    http.createServer(app).listen(7000, function() {
-        console.log("Express server listening on port %d", 7000);
+    http.createServer(app).listen(7001, function() {
+        console.log("Express server listening on port %d", 7001);
     });
 
 }
