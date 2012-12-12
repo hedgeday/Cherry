@@ -1,34 +1,30 @@
 var login = function(){
+	console.log(this);
 	this.setup(); 	
 };
 
 login.prototype.setup = function(){
 	var notificationFlag = true;
 
-	//display splash screen 
 	setTimeout(function(){$.mobile.changePage($("#home"));}, 500);
-
-	$('#signUpButton').on('tap', function(){$.mobile.changePage($("#signup"));})	
-
-	/* Set up playground on load*/
+	$.mobile.page.prototype.options.backBtnTheme = "d";
+	$('#signUpButton').on('tap', function(){$.mobile.changePage($("#signup"));})
+	
 	$(document).delegate("#playground", "pageinit", function(){
-        console.log("HERE");
-        new Playground();
-    });
-
-	/* Validate form and load profile page */
+                    console.log("HERE");
+                    new Playground();
+                });
+	
 	$('#createAccButton').on('tap', function(){
-		if (validateInfoForm())
-			$.mobile.changePage("#homescreen");
+		if (validateInfoForm())$.mobile.changePage("#homescreen");
 		loadProfPage();
 	});
-
-	/* Load name based on sign up (until server fully merged) */
+	
 	function loadProfPage(){
 		$('#myName').text($('#nInput').val());
+		// $('#myBD').text($('#birthdayInput').val());
 	}
 
-	/* Swipe away notifications */
 	$('.notificationsBox').swiperight(function(){
 		if (notificationFlag){
 			$('.notificationContent').fadeOut(100,function(){
@@ -39,21 +35,17 @@ login.prototype.setup = function(){
 		}
 	});
 
-	/* Update Mood */
+	/* Update Mood/Status */
 	$('#submitUpdate').on('tap', function(){
 		updateProfPage();
 	});
 
-	/* Update Status */
-	$('#statusField').bind('keypress', function(e) {
-		if (e.keyCode == 13) {
-			e.preventDefault();
-			if (!($('#statusField').val() == ''))
-				updateProfPage();
-		}
-	});
+	$('#statusField').bind('keypress', function(e) {if (e.keyCode == 13) {
+		e.preventDefault();
+		if (!($('#statusField').val() == ''))
+			updateProfPage();
+	}});
 
-	/* Update profile page (mood,status)*/
 	function updateProfPage(){
 		if (!$('#moodField').val() == '')
 			$('#myMood').text($('#moodField').val());
@@ -63,23 +55,21 @@ login.prototype.setup = function(){
 			$('#myStatus').text($('#statusField').val());
 		$('#popupUpdate').popup("close")
 	}
+	/* End of section*/
 
-	/* Validate Sign up Form */
 	function validateInfoForm(){
 
 		var unFlag, gFlag, pFlag, eFlag, bFlag, oeFlag, dFlag = false;
-		
-		/* Username */
 		if ($('#unInput').val() == ""){
 			$('#unInput').css('background-color', '#DEE0E0');
 			unFlag = true;
 		}
+
 		else {
 			$('#unInput').css('background-color', 'white');
 			unFlag = false;
 		}
 		
-		/* Password */
 		if (($('#pwInput').val().length < 8)){
 			$('#pwInput').css('background-color', '#DEE0E0');
 			pFlag = true;
@@ -89,17 +79,16 @@ login.prototype.setup = function(){
 			pFlag = false;
 		}
 
-		/* Name */
 		if ($('#nInput').val() == ""){
 			$('#nInput').css('background-color', '#DEE0E0');
 			nFlag = true;
 		}
+
 		else {
 			$('#nInput').css('background-color', 'white');
 			nFlag = false;
 		}
 
-		/* Email */
 		if (!isEmail($('#emailInput').val())){
 			$('#emailInput').css('background-color', '#DEE0E0');
 			eFlag = true;
@@ -109,7 +98,6 @@ login.prototype.setup = function(){
 			eFlag = false;
 		}
 
-		/* Birthday */
 		if ($('#birthdayInput').val() == ""){
 			$('#birthdayInput').css('background-color', '#DEE0E0');
 			bFlag = true;
@@ -119,7 +107,6 @@ login.prototype.setup = function(){
 			bFlag = false;
 		}
 
-		/* Gender */
 		if ($('#genderInput').val() == ""){
 			$('#otherEmailInput').css('background-color', '#DEE0E0');
 			gFlag = true;
@@ -129,7 +116,6 @@ login.prototype.setup = function(){
 			gFlag = false;
 		}
 
-		/* Significant other's email */
 		if (!isEmail($('#otherEmailInput').val())){
 			$('#otherEmailInput').css('background-color', '#DEE0E0');
 			oeFlag = true;
@@ -139,7 +125,6 @@ login.prototype.setup = function(){
 			oeFlag = false;
 		}
 
-		/* Dating since */
 		if ($('#startDateInput').val() == ""){
 			$('#startDateInput').css('background-color', '#DEE0E0');
 			dFlag = true;
@@ -159,7 +144,6 @@ login.prototype.setup = function(){
 		return (!errorFlag);
 	}
 
-	/* Basic email validation : Checks for '@' and '.' */
 	function isEmail(str){
 		if (!str) return false;
 		if (str.indexOf('@') < 0) return false; 
@@ -168,4 +152,29 @@ login.prototype.setup = function(){
 		return true;
 	}
 
+
 };
+
+
+	function timeSpentTogether(){
+		var mins=1000*60;
+		var hrs=mins*60;
+		var dys=hrs*24;
+		var yrs=dys*365;
+		if (!($('#startDateInput').val() == "")){
+			var sdInput = $('#startDateInput').val();
+			var year = parseInt(sdInput.substring(0,4));
+			console.log('years:' + year);
+			var month = parseInt(sdInput.substring(5,7));
+			console.log('months:' + month);
+			var date = parseInt(sdInput.substring(8));
+			console.log('days:' + date);
+			var startDate = new Date(year, month+1, date, 0, 0);
+			console.log('startDate:' + startDate);
+			var current = new Date();
+			console.log('current:'+ current);
+			console.log(current.getTime());
+			var diff = current.getTime() - startDate.getTime();
+			alert(diff/dys);
+		}
+	}

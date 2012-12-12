@@ -3,6 +3,7 @@
 
 var passport = require('passport');
 var User = require('./User');
+var TextMessage = require('./TextMessage');
 var MongoClient = require('mongodb').MongoClient,
   Grid = MongoClient.Grid;
 
@@ -17,6 +18,7 @@ module.exports = function (app) {
     // then send an error back stating that user already exists
     app.post('/register', function(req, res) {
         var username = req.body.username;
+
         console.log("username from register: "+username);
         console.log("request: "+req.body.username);
         console.log("response: "+res);
@@ -25,10 +27,13 @@ module.exports = function (app) {
                 return res.send({'err': err});
             }
             if (existingUser) {
+                console.log("user exists");
                 return res.send('user exists');
+
             }
 
-            var user = new User({ username : req.body.username });
+            var user = new User({ username : req.body.username, email: req.body.email, othersEmail: req.body.othersEmail, fullName: req.body.fullName, birthday: req.body.birthday, startDating: req.body.startDating, gender: req.body.gender});
+            console.log("creates a new one");
             user.registeredTimestamp = new Date();
             user.timeLineObjects = [];
             user.setPassword(req.body.password, function(err) {
@@ -53,11 +58,37 @@ module.exports = function (app) {
     
     app.post('/login', passport.authenticate('local'), function(req, res) {
         req.user.lastUserAgent = req.headers['user-agent'];
+ 
+
         req.user.lastIp = req.ip;
         req.user.lastHost = req.host;
         req.user.lastLoginTimestamp = new Date();
         req.user.save();
-        return res.send('success');
+        console.log("User's email: "+req.user.email);
+        console.log("Other's email: "+req.user.othersEmail);
+
+        TextMessage.find({$or : [{userEmail: req.user.email}, {userEmail: req.user.othersEmail}]}, 'user msg date photo typePhoto typeText typeVoice audio photoStr typeMap latitude longitude typeCanvas canvasImage',
+            {
+                sort: [['date', 1]]
+            },
+            function(err, textMsgs)
+            {
+                if(err)
+                {
+                    console.log("error");
+                }
+                else
+                {
+                    console.log("going to return all the messages from loginRoutes to clientSide")
+                    console.log(textMsgs);
+                    return res.send(textMsgs);
+                    //PRINT OUT THE TEXTS
+                }
+            }
+        );
+
+
+        // return res.send('success');
     });
 
     app.get('/logout', function(req, res) {

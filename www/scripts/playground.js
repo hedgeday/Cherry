@@ -1,14 +1,20 @@
 var Playground = function() {
-   
-   //cancels text message    
+
+    /*TEXTS*/
+    // $('#addText').tap(function(e) {
+    //     alert("crap");
+    //     $('#newTextMessage').show();
+    //     $('#newTextMessage input').focus();
+    // });
+       
    $('.cancelPost').tap(function() {
         $('#newTextMessage input').val("");
         $('#newTextMessage').hide();
     });
 
-    //submits new text message and creates card on DOM
+
     function submitPost(){
-        if (!($('#messageInput').val() === '')){
+        if (!($('#messageInput').val() == '')){
             var currentDate = new Date();
             console.log(currentDate);
             var myMsg = $("<div class='myMsg block'><div class='ui-grid-a bottomPadding'><div class='ui-block-a left chatPic'><img class='profilePicSmall' src='/images/profilePicF.png' /></div><div class='ui-block-b right chatText'>" + $('#newTextMessage input').val() + "</div></div><p class='center time'>Posted on "+currentDate+"</p></div>");      
@@ -61,16 +67,7 @@ var Playground = function() {
             event.preventDefault();
             return false;
         });
-        
-        //saves current canvas as image and adds to DOM on card
-        $("#submitCanvas").tap(function() {
-            var currentDate = new Date();
-            var img = document.getElementById("drawCanvas").toDataURL("image/png");
-            var block = $("<div class='block'><p class='center'>You posted a sketch.</p><div class='imageWrapper center'><img src='"+img+"' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");
-            $("#messages").append(block.hide().fadeIn(500));
-            $("#submitCanvas").unbind();    
-        });
-                        
+         
         //allow user to change color of canvas stroke
         $("#colorPicker input").change(function(e) {
             //remove old listeners
@@ -104,58 +101,10 @@ var Playground = function() {
     });
 
 
-    /*PHONEGAP STUFF*/
+    /*PHONE STUFF*/
     document.addEventListener('deviceReady', function(){
         
-        //gets user's current location and adds to DOM on card
-        $("#addLocation").tap(function() {
-            $('#newTextMessage').hide();
-            
-            navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 3000, timeout: 50000, enableHighAccuracy: true});
-            
-            function success(pos){
-                var lat = pos.coords.latitude;
-                var lon = pos.coords.longitude;
-                drawMap(lat, lon);
-            };
-            
-            function fail(error){
-                alert(error.code);
-            };   
-            
-            //request to Google Maps    
-            function drawMap(lat, lon) {
-                var currentDate = new Date();
-                $("#messages").append("<div class='block'><p class='center'>You posted your location.</p><div class='imageWrapper center'><img src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers="+lat+","+lon+"&sensor=true' class='pgImage'/></div><p class='center time'>Posted on "+currentDate+"</p></div>");         
-            };
-        });
         
-        //allows user to record audio message        
-        $('#addVoice').tap(function() {
-            $('#newTextMessage').hide();
-
-             navigator.device.capture.captureAudio(success, fail,
-                {
-                    limit: 1     
-                }   
-             );
-            
-            //adds audio to the DOM on card
-            function success(audioData){
-                var currentDate = new Date();
-                $("#messages").append("<div class='block'><p class='center'>You posted an audio clip.</p><p class='center playAudio'>Tap here to listen!</p><p class='center time'>Posted on "+currentDate+"</p></div>");
-                var file = new Media(audioData[0].fullPath); 
-                $(".playAudio").tap(function(){
-                    file.play();
-                });         
-            };
-            
-            function fail(msg) {
-                alert(msg);
-            };            
-            
-        });
-        
-    }, false);          
+    }, false);//event listener           
     
 };
